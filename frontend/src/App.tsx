@@ -1,10 +1,19 @@
+import appRouter from 'navigation/app.router.tsx'
+import { RouterProvider } from 'react-router'
+import { useEffect } from 'react'
+import { urls } from 'navigation/app.urls.ts'
+
 
 const App = () => {
-    return (
-        <div>
+  useEffect(() => {
+    if (location.pathname === '/') {
+      location.replace(urls.events)
+    }
+  }, [])
 
-        </div>
-    );
-};
+  return (
+    <RouterProvider router={appRouter} />
+  )
+}
 
-export default App;
+export default App

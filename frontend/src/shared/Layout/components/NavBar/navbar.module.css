@@ -1,0 +1,13 @@
+.links{
+    display: flex;
+    font-size: 20px;
+    gap: 44px;
+    color: var(--gray);
+    font-variant: small-caps;
+
+
+}
+.links a{
+    color: var(--gray);
+    font-variant: small-caps;
+}

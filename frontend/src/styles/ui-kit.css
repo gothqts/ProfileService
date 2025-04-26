@@ -1,0 +1,48 @@
+.flex-form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input--error {
+    position: absolute;
+    bottom: -25px;
+}
+
+.text-input {
+    padding: 0 26px;
+    border-radius: var(--border-radius);
+    outline: none;
+    font-size: 20px;
+    font-weight: 500;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    line-height: 45px;
+}
+.button{
+    font-family: Montserrat;
+    box-shadow:  0 4px 120px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 2px 32px;
+    font-size: 20px;
+    font-weight: 500;
+    background: var(--orange);
+    line-height: 45px;
+    color: var(--white);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}

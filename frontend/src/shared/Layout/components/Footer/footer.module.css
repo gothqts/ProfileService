@@ -1,0 +1,19 @@
+.container {
+    width: 100%;
+    display: flex;
+    padding: 0 90px;
+    align-items: center;
+    justify-content: space-between;
+    height: 201px;
+    color: var(--brown);
+    background-color: #FBFBFB;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+}
+
+.networks {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+}

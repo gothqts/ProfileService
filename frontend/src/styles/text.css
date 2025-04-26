@@ -1,0 +1,125 @@
+@font-face {
+    font-family: "Roboto";
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Marcellus_SC";
+    src: url('../assets/fonts/Marcellus_SC/MarcellusSC-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Montserrat";
+    src: url('../assets/fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 500;
+}
+
+body {
+    font-family: Roboto,
+    sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--black);
+}
+
+* {
+    font-size: inherit;
+}
+
+span,
+p,
+h1,
+h2,
+h3 {
+    white-space: pre-wrap;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+.text--orange {
+    color: var(--orange);
+}
+
+.text--white {
+    color: var(--white);
+}
+
+
+.text--brown {
+    color: var(--brown);
+}
+
+.text--error {
+    color: var(--error);
+}
+
+.text-400 {
+    font-weight: 400;
+}
+
+.text-500 {
+    font-weight: 500;
+}
+
+.text--heading1 {
+    font-size: 35px;
+    line-height: 36px;
+}
+
+.text--heading2 {
+    font-size: 65px;
+}
+
+.text--heading3 {
+    font-size: 18px;
+}
+
+.text--body-s {
+    font-size: 18px;
+}
+
+.text--body-xs {
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.text--center {
+    text-align: center;
+}
