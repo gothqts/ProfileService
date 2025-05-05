@@ -1,0 +1,511 @@
+openapi: 3.0.0
+info:
+  title: Project Management API
+  description: API для управления проектами, мероприятиями, пользователями и связанными сущностями
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+tags:
+  - name: Directions
+    description: Управление направлениями
+  - name: Events
+    description: Управление мероприятиями
+  - name: Meetings
+    description: Управление встречами
+  - name: Projects
+    description: Управление проектами
+  - name: Requests
+    description: Управление запросами
+  - name: Users
+    description: Управление пользователями
+  - name: Specializations
+    description: Управление специализациями
+  - name: Stacks
+    description: Управление технологическими стеками
+
+paths:
+  /directions:
+    get:
+      tags:
+        - Directions
+      summary: Получение всех направлений
+      description: Возвращает список всех направлений с их проектами и командами
+      responses:
+        '200':
+          description: Список направлений успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DirectionDto'
+
+  /events:
+    get:
+      tags:
+        - Events
+      summary: Получение всех мероприятий
+      description: Возвращает список всех мероприятий с их описанием и связанными направлениями
+      responses:
+        '200':
+          description: Список мероприятий успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventDto'
+
+  /meetings:
+    get:
+      tags:
+        - Meetings
+      summary: Получение всех встреч аутентифицированного пользователя
+      description: Возвращает список встреч текущего аутентифицированного пользователя
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Список встреч успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeetingDto'
+
+  /projects:
+    get:
+      tags:
+        - Projects
+      summary: Получение всех проектов
+      description: Возвращает список всех проектов с основной информацией
+      responses:
+        '200':
+          description: Список проектов успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectMainDto'
+
+  /requests:
+    get:
+      tags:
+        - Requests
+      summary: Получение всех запросов аутентифицированного пользователя
+      description: Возвращает список запросов текущего аутентифицированного пользователя
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Список запросов успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestDto'
+
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Получение данных о профиле пользователя
+      description: Возвращает информацию о текущем аутентифицированном пользователе
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Данные пользователя успешно получены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+
+    post:
+      tags:
+        - Users
+      summary: Создание нового пользователя
+      description: Регистрация нового пользователя в системе
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserDto'
+      responses:
+        '201':
+          description: Пользователь успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+
+    put:
+      tags:
+        - Users
+      summary: Обновление данных пользователя
+      description: Обновление профиля текущего аутентифицированного пользователя
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserDto'
+      responses:
+        '200':
+          description: Данные пользователя успешно обновлены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+
+  /users/auth:
+    post:
+      tags:
+        - Users
+      summary: Аутентификация пользователя
+      description: Вход пользователя в систему и получение JWT токена
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnterUserDto'
+      responses:
+        '201':
+          description: Успешная аутентификация
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwtResponse'
+
+  /users/my:
+    get:
+      tags:
+        - Users
+      summary: Получение списка проектов, команд и направлений пользователя
+      description: |
+        Получение списка проектов, команд и направлений конкретного пользователя.
+        Результат зависит от роли пользователя (LEADER или другие).
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: role
+          in: query
+          description: Роль пользователя (LEADER или другие)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Данные успешно получены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilsDto'
+
+  /specializations:
+    get:
+      tags:
+        - Specializations
+      summary: Получение всех специализаций
+      description: Возвращает список всех доступных специализаций
+      responses:
+        '200':
+          description: Список специализаций успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpecializationDto'
+
+    post:
+      tags:
+        - Specializations
+      summary: Создание новой специализации
+      description: Добавление новой специализации в систему
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpecializationDto'
+      responses:
+        '200':
+          description: Специализация успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpecializationDto'
+
+  /stacks:
+    get:
+      tags:
+        - Stacks
+      summary: Получение всех технологических стеков
+      description: Возвращает список всех доступных технологических стеков
+      responses:
+        '200':
+          description: Список стеков успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StackDto'
+
+    post:
+      tags:
+        - Stacks
+      summary: Создание нового технологического стека
+      description: Добавление нового технологического стека в систему
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StackDto'
+      responses:
+        '200':
+          description: Стек успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StackDto'
+
+components:
+  schemas:
+    DirectionDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        eventName:
+          type: string
+        projectsName:
+          type: array
+          items:
+            type: string
+        teamsName:
+          type: array
+          items:
+            type: string
+
+    EventDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        stage:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        directionsName:
+          type: array
+          items:
+            type: string
+
+    MeetingDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        topic:
+          type: string
+        link:
+          type: string
+        teamName:
+          type: string
+
+    ProjectMainDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        topic:
+          type: string
+        eventName:
+          type: string
+        directionName:
+          type: string
+        curatorName:
+          type: string
+
+    ProjectLkDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        eventName:
+          type: string
+        directionName:
+          type: string
+        topic:
+          type: string
+        teamName:
+          type: string
+
+    RequestDto:
+      type: object
+      properties:
+        eventName:
+          type: string
+        projectName:
+          type: string
+        specializationName:
+          type: string
+        status:
+          type: string
+
+    TeamDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        projectName:
+          type: string
+        usersName:
+          type: array
+          items:
+            type: string
+
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        surname:
+          type: string
+        university:
+          type: string
+        speciality:
+          type: string
+        course:
+          type: integer
+        telegram:
+          type: string
+        email:
+          type: string
+        vk:
+          type: string
+        specialization:
+          type: string
+        stack:
+          type: array
+          items:
+            type: string
+        userRole:
+          type: string
+
+    UtilsDto:
+      type: object
+      properties:
+        utils1:
+          type: array
+          items: {}
+        utils2:
+          type: array
+          items: {}
+
+    EnterUserDto:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    JwtResponse:
+      type: object
+      properties:
+        jwt:
+          type: string
+
+    SpecializationDto:
+      type: object
+      properties:
+        name:
+          type: string
+
+    StackDto:
+      type: object
+      properties:
+        name:
+          type: string
+
+    RegisterUserDto:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        repeatPassword:
+          type: string
+
+    UpdateUserDto:
+      type: object
+      properties:
+        name:
+          type: string
+        surname:
+          type: string
+        university:
+          type: string
+        speciality:
+          type: string
+        course:
+          type: integer
+        telegram:
+          type: string
+        vk:
+          type: string
+        specialization:
+          type: string
+        stack:
+          type: array
+          items:
+            type: string
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

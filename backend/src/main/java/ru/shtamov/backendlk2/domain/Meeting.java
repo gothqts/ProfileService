@@ -5,33 +5,27 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ru.shtamov.backendlk2.domain.enums.Stage;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class Event {
+public class Meeting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private LocalDate date;
 
-    private String description;
+    private String topic;
 
-    private Stage stage;
+    private String link;
 
-    private LocalDate startDate;
-
-    private LocalDate endDate;
-
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
-    private List<Direction> directions;
-    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "project_id")
+    private Project project;
 }

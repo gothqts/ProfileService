@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ru.shtamov.backendlk2.domain.enums.Stage;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -15,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class Event {
+public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,15 +21,16 @@ public class Event {
 
     private String name;
 
-    private String description;
+    @OneToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
-    private Stage stage;
+    @ManyToMany
+    @JoinTable(
+            name = "user_table_teams",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users;
 
-    private LocalDate startDate;
-
-    private LocalDate endDate;
-
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
-    private List<Direction> directions;
-    
 }
