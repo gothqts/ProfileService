@@ -28,6 +28,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
                          AuthenticationException authException) throws IOException, ServletException {
         log.error(authException.getMessage());
 
+        response.setContentType("application/json;charset=UTF-8");
         ErrorResponseDto responseDto = new ErrorResponseDto(
                 "Необходима аутентификация",
                 authException.getMessage(),

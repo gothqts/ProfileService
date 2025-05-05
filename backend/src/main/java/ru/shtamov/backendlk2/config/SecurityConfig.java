@@ -49,12 +49,22 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeHttpRequests ->
                         authorizeHttpRequests
                                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/users/auth").permitAll()
 
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/v3/api-docs/**").permitAll()
                                 .requestMatchers("/openapi-lk.yaml").permitAll()
 
-                                .requestMatchers(HttpMethod.GET, "/**").authenticated()
+                                .requestMatchers("/directions").authenticated()
+                                .requestMatchers("/events").authenticated()
+                                .requestMatchers("/projects").authenticated()
+                                .requestMatchers("/specializations").authenticated()
+                                .requestMatchers("/stacks").authenticated()
+                                .requestMatchers("/requests").authenticated()
+                                .requestMatchers("/meetings").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/users").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/users/my").authenticated()
+                                .requestMatchers(HttpMethod.PUT, "/users").authenticated()
                 )
                 .exceptionHandling(exception ->
                         exception

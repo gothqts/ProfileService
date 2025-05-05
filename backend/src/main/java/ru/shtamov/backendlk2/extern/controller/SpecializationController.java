@@ -1,12 +1,8 @@
 package ru.shtamov.backendlk2.extern.controller;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.shtamov.backendlk2.application.serivce.SpecializationService;
 import ru.shtamov.backendlk2.extern.dto.SpecializationDto;
 
@@ -30,8 +26,7 @@ public class SpecializationController {
     public ResponseEntity<SpecializationDto> create(@RequestBody SpecializationDto specializationDto){
         SpecializationDto createdDto =
                 new SpecializationDto(
-                        specializationService.sendRequestToAdd(specializationDto.name()
-                        ).getName());
+                        specializationService.sendRequestToAdd(specializationDto.name()).getName());
 
         return ResponseEntity.ok().body(createdDto);
     }

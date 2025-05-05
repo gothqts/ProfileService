@@ -85,8 +85,7 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<?> update(@RequestBody UpdateUserDto userDto){
-        Profile currentProfile = userService.getAuthenticatedUser().getProfile();
-        Profile updatedProfile = userService.updateUser(currentProfile, userDtoConverter.toProfile(userDto));
+        Profile updatedProfile = userService.updateUser(userDtoConverter.toProfile(userDto));
 
         User currentUser = userService.getAuthenticatedUser();
 

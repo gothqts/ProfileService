@@ -56,8 +56,9 @@ public class UserService {
     }
 
 
-    public Profile updateUser(Profile currentProfile, Profile profile) {
+    public Profile updateUser(Profile profile) {
         User user = getAuthenticatedUser();
+        Profile currentProfile = user.getProfile();
 
         currentProfile.setName(profile.getName());
         currentProfile.setSurname(profile.getSurname());
@@ -67,9 +68,14 @@ public class UserService {
         currentProfile.setCourse(profile.getCourse());
         currentProfile.setSpecialization(profile.getSpecialization());
         currentProfile.setStackList(profile.getStackList());
+        currentProfile.setVk(profile.getVk());
+        currentProfile.setTelegram(profile.getTelegram());
+        profileRepository.save(currentProfile);
 
         user.setProfile(currentProfile);
         userRepository.save(user);
+
+        log.info("Пользователь {} {} обновлен", profile.getName(), profile.getSurname());
 
         return currentProfile;
     }
@@ -101,7 +107,7 @@ public class UserService {
                         password
                 )
         );
-        ;
+
         return jwtTokenManager.generateToken(email, authentication.getAuthorities());
     }
 

@@ -44,6 +44,8 @@ public class UserDtoConverter {
         profile.setUniversity(userDto.university());
         profile.setSpeciality(userDto.speciality());
         profile.setCourse(userDto.course());
+        profile.setTelegram(userDto.telegram());
+        profile.setVk(userDto.vk());
         profile.setSpecialization(specializationRepository.findByName(userDto.specializationName()));
         profile.setStackList(stackRepository.findAllByNameIn(userDto.stackNames()));
 

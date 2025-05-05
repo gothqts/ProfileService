@@ -26,6 +26,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         log.error(accessDeniedException.getMessage());
 
+        response.setContentType("application/json;charset=UTF-8");
         ErrorResponseDto responseDto = new ErrorResponseDto(
                 "Недостаточно прав для выполнения операции",
                 accessDeniedException.getMessage(),

@@ -9,6 +9,8 @@ public record UpdateUserDto(
         String university,
         String speciality,
         Integer course,
+        String telegram,
+        String vk,
 
         String specializationName,
         List<String> stackNames

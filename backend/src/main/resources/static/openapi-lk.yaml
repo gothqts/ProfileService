@@ -31,6 +31,8 @@ paths:
         - Directions
       summary: Получение всех направлений
       description: Возвращает список всех направлений с их проектами и командами
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Список направлений успешно получен
@@ -47,6 +49,8 @@ paths:
         - Events
       summary: Получение всех мероприятий
       description: Возвращает список всех мероприятий с их описанием и связанными направлениями
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Список мероприятий успешно получен
@@ -81,6 +85,8 @@ paths:
         - Projects
       summary: Получение всех проектов
       description: Возвращает список всех проектов с основной информацией
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Список проектов успешно получен
@@ -216,6 +222,8 @@ paths:
         - Specializations
       summary: Получение всех специализаций
       description: Возвращает список всех доступных специализаций
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Список специализаций успешно получен
@@ -231,6 +239,8 @@ paths:
         - Specializations
       summary: Создание новой специализации
       description: Добавление новой специализации в систему
+      security:
+        - bearerAuth: [ ]
       requestBody:
         required: true
         content:
@@ -251,6 +261,8 @@ paths:
         - Stacks
       summary: Получение всех технологических стеков
       description: Возвращает список всех доступных технологических стеков
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Список стеков успешно получен
@@ -266,6 +278,8 @@ paths:
         - Stacks
       summary: Создание нового технологического стека
       description: Добавление нового технологического стека в систему
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
