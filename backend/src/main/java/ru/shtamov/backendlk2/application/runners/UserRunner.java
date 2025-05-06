@@ -24,6 +24,7 @@ public class UserRunner {
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EventDirectionRunner eventDirectionRunner;
 
 
     @Transactional
@@ -33,15 +34,11 @@ public class UserRunner {
 
         if (userRepository.count() == 0){
             List<User> users = List.of(
-                    // 8 лидеров (LEADER)
+                    // 4 лидера (LEADER)
                     createUserWithProfile("leader1@university.ru", "LeaderPass123!", "Иван", "Петров", "Сергеевич", 3, "МГУ", "Прикладная информатика", "@ivan_petrov", "vk.com/ivan_petrov", UserRole.LEADER),
                     createUserWithProfile("leader2@university.ru", "LeaderPass123!", "Анна", "Смирнова", "Игоревна", 4, "СПбГУ", "Программная инженерия", "@anna_smirnova", "vk.com/anna_smirnova", UserRole.LEADER),
                     createUserWithProfile("leader3@university.ru", "LeaderPass123!", "Дмитрий", "Кузнецов", "Алексеевич", 2, "НГУ", "Компьютерные науки", "@dmitry_kuznetsov", "vk.com/dmitry_kuz", UserRole.LEADER),
                     createUserWithProfile("leader4@university.ru", "LeaderPass123!", "Екатерина", "Волкова", "Дмитриевна", 3, "УрФУ", "Информационные системы", "@ekaterina_volkova", "vk.com/katya_volkova", UserRole.LEADER),
-                    createUserWithProfile("leader5@university.ru", "LeaderPass123!", "Артем", "Соколов", "Андреевич", 4, "КФУ", "Искусственный интеллект", "@artem_sokolov", "vk.com/artem_sokolov", UserRole.LEADER),
-                    createUserWithProfile("leader6@university.ru", "LeaderPass123!", "Ольга", "Попова", "Викторовна", 2, "МФТИ", "Анализ данных", "@olga_popova", "vk.com/olga_popova", UserRole.LEADER),
-                    createUserWithProfile("leader7@university.ru", "LeaderPass123!", "Михаил", "Васильев", "Олегович", 3, "ВШЭ", "Кибербезопасность", "@mikhail_vasiliev", "vk.com/misha_vasiliev", UserRole.LEADER),
-                    createUserWithProfile("leader8@university.ru", "LeaderPass123!", "Алина", "Новикова", "Артемовна", 4, "ИТМО", "Веб-разработка", "@alina_novikova", "vk.com/alina_novikova", UserRole.LEADER),
 
                     // 4 куратора (CURATOR)
                     createUserWithProfile("curator1@university.ru", "CuratorPass123!", "Сергей", "Иванов", "Петрович", null, "МГУ", null, "@sergey_ivanov", "vk.com/sergey_ivanov", UserRole.CURATOR),
@@ -61,10 +58,11 @@ public class UserRunner {
             );
             users.forEach(user -> {
                 Profile profile = user.getProfile();
-                profile = profileRepository.save(profile);
-                user.setProfile(profile);
+                profileRepository.save(profile);
                 userRepository.save(user);
             });
+
+            eventDirectionRunner.run();
         }
     }
 

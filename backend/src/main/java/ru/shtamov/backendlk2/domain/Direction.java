@@ -25,7 +25,7 @@ public class Direction {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    @OneToMany(mappedBy = "direction")
+    @OneToMany(mappedBy = "direction", cascade = CascadeType.PERSIST)
     private List<Project> projects;
 
     @ManyToOne

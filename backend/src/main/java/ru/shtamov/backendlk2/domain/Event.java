@@ -24,13 +24,13 @@ public class Event {
 
     private String description;
 
-    private Stage stage;
+    private String stage;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Direction> directions;
     
 }

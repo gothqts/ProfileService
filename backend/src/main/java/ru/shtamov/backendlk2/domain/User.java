@@ -42,6 +42,6 @@ public class User {
     @OneToMany(mappedBy = "leader", fetch = FetchType.EAGER)
     private List<Direction> directions;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Team> teams;
 }

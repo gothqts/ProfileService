@@ -26,13 +26,12 @@ public class Project {
 
     private String topic;
 
-    @Enumerated(EnumType.STRING)
-    private Stage stage;
+    private String stage;
 
-    @OneToOne(mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "project", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Team team;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Meeting> meetings;
 
     @ManyToOne
