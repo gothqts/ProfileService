@@ -8,13 +8,14 @@ const links: ILink[] = [
 
   },
   {
-    path: urls.meetings,
+    path: urls.events,
     name: 'Мероприятия',
   },
   {
-    path: urls.events,
+    path: urls.meetings,
     name: 'Мои собрания',
   },
+
   {
     path: urls.applications,
     name: 'Заявки',

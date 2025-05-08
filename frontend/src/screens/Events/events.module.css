@@ -1,0 +1,64 @@
+.container {
+    width: 100%;
+    padding: 0 104px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.events_list {
+    margin-top: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.menu {
+    display: flex;
+    margin-top: 61px;
+}
+
+
+.menu_add_btn {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--white2);
+    border: none;
+    width: 50px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Горизонтальная линия плюса */
+.menu_add_btn::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 27px;
+    height: 2px;
+    background: #7F7F7F;
+    transform: translate(-50%, -50%);
+}
+
+/* Вертикальная линия плюса */
+.menu_add_btn::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2px;
+    height: 27px;
+    background: #7F7F7F;
+    transform: translate(-50%, -50%);
+}
+
+.filters {
+    margin-top: 30px;
+    display: flex;
+    gap: 34px;
+    margin-bottom: 30px;
+
+}

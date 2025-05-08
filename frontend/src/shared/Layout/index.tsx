@@ -10,7 +10,10 @@ import Footer from 'shared/Layout/components/Footer'
 const Layout = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      <div
+        className={styles.header}
+        style={location.pathname !== '/auth' ? { borderBottom: '1px solid rgba(0, 0, 0, 0.1)' } : {}}
+      >
         <LogoBlock style={{ marginRight: '100px' }} />
         {location.pathname !== '/auth' && (
           <>

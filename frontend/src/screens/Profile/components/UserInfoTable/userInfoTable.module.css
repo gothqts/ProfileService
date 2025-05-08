@@ -1,0 +1,42 @@
+.userTable {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.userTable th {
+    color: black;
+    text-align: left;
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+
+.userTable td:first-child {
+    box-sizing: border-box;
+}
+
+.userTable td:last-child {
+    padding-left: 36px;
+}
+
+.userTable td {
+    padding: 5px 4px;
+    vertical-align: top;
+    max-width: 230px;
+    white-space: nowrap;
+}
+
+.label {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.value {
+    color: var(--black);
+    padding-left: 15px;
+}
+
+.userTable tr:last-child td {
+    border-bottom: none;
+}

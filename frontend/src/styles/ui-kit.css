@@ -19,17 +19,19 @@
 }
 
 .text-input {
-    padding: 0 26px;
+    padding: 11px 26px;
     border-radius: var(--border-radius);
     outline: none;
     font-size: 20px;
     font-weight: 500;
     border: 1px solid rgba(0, 0, 0, 0.5);
-    line-height: 45px;
 }
-.button{
-    font-family: Montserrat;
-    box-shadow:  0 4px 120px 0 rgba(0, 0, 0, 0.25);
+.table-orange-border{
+    border-top: 1px solid var(--orange-border);
+    font-size: 15px;
+}
+.button {
+    box-shadow: 0 4px 120px 0 rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     padding: 2px 32px;
     font-size: 20px;

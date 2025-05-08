@@ -1,23 +1,25 @@
 .container {
+    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
-    width: 100%;
     align-items: center;
 }
-.form{
+
+.form {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     width: 353px;
-
 }
-.fields{
+
+.fields {
     gap: 29px;
 }
-.login_bottom{
+
+.login_bottom {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -25,7 +27,8 @@
     width: 100%;
 
 }
-.register_bottom{
+
+.register_bottom {
     display: flex;
     flex-direction: column;
     align-items: center;

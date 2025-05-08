@@ -1,0 +1,21 @@
+.controlPanel {
+    font-size: 35px;
+    display: flex;
+    color: var(--gray);
+}
+.controlPanel_btn {
+    color: var(--gray);
+    padding: 10px 10px 0;
+    cursor: pointer;
+    border: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    background: transparent;
+}
+
+.controlPanel_btn:nth-child(2) {
+    border-right: none;
+}
+
+.controlPanel_btn_active {
+    color: var(--black);
+}

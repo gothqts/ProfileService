@@ -3,6 +3,8 @@ import { urls } from './app.urls.ts'
 import { IRoute } from './navigation.types.ts'
 
 const Profile = lazy(() => import('screens/Profile'))
+const UpdateProfile = lazy(() => import('screens/Profile/pages/UpdateProfile'))
+
 const Events = lazy(() => import('screens/Events'))
 const Properties = lazy(() => import('screens/Properties'))
 const Meetings = lazy(() => import('screens/Meetings'))
@@ -13,6 +15,10 @@ const appRoutes: IRoute[] = [
   {
     path: urls.profile,
     element: <Profile />,
+  },
+  {
+    path: urls.updateProfile,
+    element: <UpdateProfile />,
   },
   {
     path: urls.events,
