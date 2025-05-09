@@ -13,7 +13,6 @@ const NavigationLink = (props: IProps) => {
             {({ isActive }) => (
               <div style={{padding: '0px 5px'}} className={isActive ? styles.active : ""}>{props.link.name}</div>
             )}
-
         </NavLink>
     );
 };

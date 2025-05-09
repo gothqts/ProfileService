@@ -9,7 +9,6 @@ const Events = lazy(() => import('screens/Events'))
 const Properties = lazy(() => import('screens/Properties'))
 const Meetings = lazy(() => import('screens/Meetings'))
 const Applications = lazy(() => import('screens/Applications'))
-const Auth = lazy(() => import('screens/Auth'))
 
 const appRoutes: IRoute[] = [
   {
@@ -36,10 +35,6 @@ const appRoutes: IRoute[] = [
   {
     path: urls.properties,
     element: <Properties />,
-  },
-  {
-    path: urls.auth,
-    element: <Auth />,
   },
 
 ]
