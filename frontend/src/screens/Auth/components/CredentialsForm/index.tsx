@@ -20,8 +20,8 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
           <>
             <TextInput
               placeholder="Имя"
-              name="name"
-              value={context.values.name}
+              name="firstName"
+              value={context.values.firstName}
               onChange={context.onChange}
               type="text"
               autoComplete="off"
@@ -58,8 +58,8 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
             />
             <PasswordInput
               placeholder="Повторный пароль"
-              name="checkPassword"
-              value={context.values.checkPassword}
+              name="repeatPassword"
+              value={context.values.repeatPassword}
               onChange={context.onChange}
               autoComplete="off"
             />

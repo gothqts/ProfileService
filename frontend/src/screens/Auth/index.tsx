@@ -5,6 +5,9 @@ import AuthContext from 'screens/Auth/auth.context.ts'
 import { useState } from 'react'
 import useAuthCtrl from 'screens/Auth/hooks/useAuthCtrl.tsx'
 import Button from 'shared/Buttons'
+import Footer from 'shared/Layout/components/Footer'
+import LogoBlock from 'shared/Layout/components/Header/LogoBlock'
+import cn from 'utils/cn.ts'
 
 const Auth = () => {
 
@@ -20,12 +23,16 @@ const Auth = () => {
   }
   return (
     <div className={styles.container}>
+      <div className={styles.header}>
+        <LogoBlock style={{ marginRight: '100px' }} />
+      </div>
 
       <AuthContext.Provider
         value={{ values: authCtrl.authValues, onChange: authCtrl.handleChange }}
       >
+
         <form
-          className='flex-form'
+          className={cn('flex-form', styles.content)}
           onSubmit={authCtrl.handleSubmitCredentials}
         >
           <CredentialsForm actionType={authType}>
@@ -36,7 +43,7 @@ const Auth = () => {
               <span
                 onClick={changeType}
                 className="text--orange"
-                style={{cursor: 'pointer', fontSize: '20px'}}
+                style={{ cursor: 'pointer', fontSize: '20px' }}
               >
                 {authType === 'register' ? 'Есть аккаунт?' : 'Нет аккаунта?'}
                 </span>
@@ -44,9 +51,9 @@ const Auth = () => {
             </div>
           </CredentialsForm>
         </form>
+
       </AuthContext.Provider>
-
-
+      <Footer />
     </div>
   )
 }

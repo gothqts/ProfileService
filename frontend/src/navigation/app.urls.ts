@@ -5,5 +5,4 @@ export const urls = {
     applications: '/applications',
     properties: '/properties',
     meetings: '/meetings',
-    auth: '/auth',
 }

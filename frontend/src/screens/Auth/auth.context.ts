@@ -7,12 +7,12 @@ interface IAuthContext {
 }
 
 export const generateEmptyAuthState = (): IRegisterValues => ({
-  name: '',
+  firstName: '',
   lastname: '',
   phone: '',
   email: '',
   password: '',
-  checkPassword: '',
+  repeatPassword: '',
 })
 
 const AuthContext = createContext<IAuthContext>({
