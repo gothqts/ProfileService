@@ -36,12 +36,12 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody @Valid RegisterUserDto userDto){
-        User createdUser = userService.registerUser(userDtoConverter.toDomain(userDto));
+    public ResponseEntity<JwtResponse> createUser(@RequestBody @Valid RegisterUserDto userDto){
+        String jwt = userService.registerUser(userDtoConverter.toDomain(userDto));
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(userDtoConverter.toUserDto(createdUser, createdUser.getProfile()));
+                .body(new JwtResponse(jwt));
     }
 
     @PostMapping("/auth")

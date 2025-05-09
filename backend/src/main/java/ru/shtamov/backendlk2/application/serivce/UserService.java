@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import ru.shtamov.backendlk2.extern.repository.ProfileRepository;
 import ru.shtamov.backendlk2.extern.repository.ProjectRepository;
 import ru.shtamov.backendlk2.extern.repository.UserRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -27,15 +29,13 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenManager jwtTokenManager;
     private final PasswordEncoder passwordEncoder;
-    private final ProjectRepository projectRepository;
 
-    public UserService(UserRepository userRepository, ProfileRepository profileRepository, @Lazy AuthenticationManager authenticationManager, @Lazy JwtTokenManager jwtTokenManager, @Lazy PasswordEncoder passwordEncoder, ProjectRepository projectRepository) {
+    public UserService(UserRepository userRepository, ProfileRepository profileRepository, @Lazy AuthenticationManager authenticationManager, @Lazy JwtTokenManager jwtTokenManager, @Lazy PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.profileRepository = profileRepository;
         this.authenticationManager = authenticationManager;
         this.jwtTokenManager = jwtTokenManager;
         this.passwordEncoder = passwordEncoder;
-        this.projectRepository = projectRepository;
     }
 
     public User findByEmail(String email) {
@@ -80,7 +80,7 @@ public class UserService {
         return currentProfile;
     }
 
-    public User registerUser(User user){
+    public String registerUser(User user){
         if (userRepository.existsByEmail(user.getEmail()))
             throw new IllegalArgumentException("Пользователь с почтой %s уже существует".formatted(user.getEmail()));
 
@@ -97,7 +97,8 @@ public class UserService {
         User createdUser = userRepository.save(user);
         log.info("Пользователь с логином {} создан", createdUser.getEmail());
 
-        return  createdUser;
+        return jwtTokenManager.generateToken(user.getEmail()
+                , List.of(new SimpleGrantedAuthority(user.getRole().name())));
     }
 
     public String authenticateUser(String email, String password){
