@@ -28,8 +28,8 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
             />
             <TextInput
               placeholder="Фамилия"
-              name="lastname"
-              value={context.values.lastname}
+              name="lastName"
+              value={context.values.lastName}
               onChange={context.onChange}
               type="text"
               autoComplete="off"

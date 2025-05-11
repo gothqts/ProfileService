@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 import { urls } from './app.urls.ts'
 import { IRoute } from './navigation.types.ts'
+import { profileLoader } from 'navigation/app.loaders.ts'
 
 const Profile = lazy(() => import('screens/Profile'))
 const UpdateProfile = lazy(() => import('screens/Profile/pages/UpdateProfile'))
