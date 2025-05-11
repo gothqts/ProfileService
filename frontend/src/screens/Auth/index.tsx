@@ -47,7 +47,6 @@ const Auth = () => {
               >
                 {authType === 'register' ? 'Есть аккаунт?' : 'Нет аккаунта?'}
                 </span>
-
             </div>
           </CredentialsForm>
         </form>

@@ -5,20 +5,20 @@ import { AxiosError } from 'axios'
 
 const login = async (data: ILoginValues) => {
   try {
-    let resp=  await http.post(config.API_URL + '/users/auth', data, { withCredentials: true })
+    let resp = await http.post(config.API_URL + '/users/auth', data)
+    console.log('Логин')
     return handleHttpResponse(resp)
   } catch (err) {
     return handleErrorResponse(err as AxiosError)
   }
 }
 
-
 const register = async (data: IRegisterValues) => {
-  let resp = await http.post(config.API_URL + '/users', data)
   try {
+    let resp = await http.post(config.API_URL + '/users', data)
     return handleHttpResponse(resp)
   } catch (err) {
-    return handleHttpResponse(resp)
+    return handleErrorResponse(err as AxiosError)
   }
 }
 export const authApi = {

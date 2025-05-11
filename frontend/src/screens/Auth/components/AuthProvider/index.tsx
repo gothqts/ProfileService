@@ -5,7 +5,7 @@ import Auth from 'screens/Auth'
 
 const AuthProvider = (props: PropsWithChildren) => {
   const authState = useAtomValue(authAtom)
-  if (!authState.auth || !authState.auth.accessToken) {
+  if (!localStorage.getItem('token') && !authState.auth.accessToken) {
     return <Auth />
   }
   return (

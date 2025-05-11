@@ -4,7 +4,7 @@ interface IProps {
   header: string;
   cells: {
     label: string;
-    value: string;
+    value: string | string[] | number;
   }[]
 }
 
@@ -24,7 +24,7 @@ const UserInfoTable = (props: IProps) => {
           <td className={styles.label}>
             {cell.label}
           </td>
-          <td className={styles.value}>{cell.value}</td>
+          <td className={styles.value}>{cell.value ?? '–'}</td>
         </tr>
       ))}
       </tbody>

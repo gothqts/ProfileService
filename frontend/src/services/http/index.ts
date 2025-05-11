@@ -13,7 +13,6 @@ http.interceptors.request.use((config) => {
   return config
 })
 
-
 export const handleHttpResponse = <T>(response: AxiosResponse<T>): ISuccessResponse<T> => {
   return {
     body: response.data,

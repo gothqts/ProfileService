@@ -1,6 +1,6 @@
 export interface IRegisterValues{
   firstName: string,
-  lastname: string,
+  lastName: string,
   phone: string,
   email: string,
   password: string,
@@ -8,7 +8,8 @@ export interface IRegisterValues{
 }
 export interface IAuth{
   accessToken: string,
-  expires: number,
+  expires: number | null,
+  role: string
 }
 
 export interface IAuthState {

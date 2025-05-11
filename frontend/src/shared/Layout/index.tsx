@@ -15,9 +15,7 @@ const Layout = () => {
           <Outlet />
         </Suspense>
       </div>
-      <div className={styles.footer}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   )
 }
