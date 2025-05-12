@@ -7,6 +7,7 @@ public record UserDto(
         Long id,
         String name,
         String surname,
+        String patronymic,
         String university,
         String speciality,
         Integer course,

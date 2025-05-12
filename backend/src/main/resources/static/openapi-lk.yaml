@@ -418,6 +418,8 @@ components:
           type: string
         surname:
           type: string
+        patronymic:
+          type: string
         university:
           type: string
         speciality:
@@ -500,6 +502,8 @@ components:
         name:
           type: string
         surname:
+          type: string
+        patronymic:
           type: string
         university:
           type: string

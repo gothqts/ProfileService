@@ -14,7 +14,6 @@ import ru.shtamov.backendlk2.domain.Profile;
 import ru.shtamov.backendlk2.domain.User;
 import ru.shtamov.backendlk2.domain.enums.UserRole;
 import ru.shtamov.backendlk2.extern.repository.ProfileRepository;
-import ru.shtamov.backendlk2.extern.repository.ProjectRepository;
 import ru.shtamov.backendlk2.extern.repository.UserRepository;
 
 import java.util.List;

@@ -21,8 +21,9 @@ public class UserDtoConverter {
     public UserDto toUserDto(User user, Profile profile) {
         return new UserDto(
                 user.getId(),
-                user.getFirstname(),
-                user.getLastname(),
+                profile.getName(),
+                profile.getSurname(),
+                profile.getPatronymic(),
                 profile.getUniversity(),
                 profile.getSpeciality(),
                 profile.getCourse(),
@@ -38,16 +39,16 @@ public class UserDtoConverter {
     public Profile toProfile(UpdateUserDto userDto) {
         Profile profile = new Profile();
 
-        profile.setName(userDto.firstName());
-        profile.setSurname(userDto.lastName());
-        profile.setPatronymic(userDto.surname());
+        profile.setName(userDto.name());
+        profile.setSurname(userDto.surname());
+        profile.setPatronymic(userDto.patronymic());
         profile.setUniversity(userDto.university());
         profile.setSpeciality(userDto.speciality());
         profile.setCourse(userDto.course());
         profile.setTelegram(userDto.telegram());
         profile.setVk(userDto.vk());
-        profile.setSpecialization(specializationRepository.findByName(userDto.specializationName()));
-        profile.setStackList(stackRepository.findAllByNameIn(userDto.stackNames()));
+        profile.setSpecialization(specializationRepository.findByName(userDto.specialization()));
+        profile.setStackList(stackRepository.findAllByNameIn(userDto.stack()));
 
         return profile;
 
