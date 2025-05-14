@@ -4,7 +4,7 @@ info:
   description: API для управления проектами, мероприятиями, пользователями и связанными сущностями
   version: 1.0.0
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8081
     description: Local server
 tags:
   - name: Directions
@@ -201,13 +201,6 @@ paths:
         Результат зависит от роли пользователя (LEADER или другие).
       security:
         - bearerAuth: []
-      parameters:
-        - name: role
-          in: query
-          description: Роль пользователя (LEADER или другие)
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: Данные успешно получены
@@ -364,6 +357,10 @@ components:
         directionName:
           type: string
         curatorName:
+          type: string
+        startDate:
+          type: string
+        endDate:
           type: string
 
     ProjectLkDto:

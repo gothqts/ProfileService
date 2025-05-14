@@ -104,6 +104,8 @@ public class EventDirectionRunner {
                     )),
                     webDevelopment,
                     curators.get(0) // Тимлид
+                    , springHackathon.getStartDate()
+                    , springHackathon.getEndDate()
             );
             mentorPlatform = pr.save(mentorPlatform);
             for (Meeting meeting : mentorPlatform.getMeetings()){
@@ -131,6 +133,8 @@ public class EventDirectionRunner {
                     ))),
                     webDevelopment,
                     curators.get(1)
+                    , springHackathon.getStartDate()
+                    , springHackathon.getEndDate()
             );
             lmsSystem = pr.save(lmsSystem);
             for (Meeting meeting : lmsSystem.getMeetings()){
@@ -159,6 +163,8 @@ public class EventDirectionRunner {
                     ))),
                     mobileDevelopment,
                     curators.get(2)
+                    , springHackathon.getStartDate()
+                    , springHackathon.getEndDate()
             );
             campusNav = pr.save(campusNav);
             for (Meeting meeting : campusNav.getMeetings()){
@@ -186,6 +192,8 @@ public class EventDirectionRunner {
                     )),
                     mobileDevelopment,
                     curators.get(3)
+                    , springHackathon.getStartDate()
+                    , springHackathon.getEndDate()
             );
             foodTracker = pr.save(foodTracker);
             for (Meeting meeting : foodTracker.getMeetings()){
@@ -246,6 +254,8 @@ public class EventDirectionRunner {
                     ))),
                     aiDirection,
                     curators.get(0)
+                    , autumnMarathon.getStartDate()
+                    , autumnMarathon.getEndDate()
             );
             teamBuilder = pr.save(teamBuilder);
             for (Meeting meeting : teamBuilder.getMeetings()){
@@ -274,6 +284,8 @@ public class EventDirectionRunner {
                     ))),
                     cybersecurity,
                     curators.get(1)
+                    , autumnMarathon.getStartDate()
+                    , autumnMarathon.getEndDate()
             );
             auditTool = pr.save(auditTool);
             for (Meeting meeting : auditTool.getMeetings()){

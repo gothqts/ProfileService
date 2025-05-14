@@ -25,7 +25,9 @@ public class ProjectDtoConverter {
                 project.getTopic(),
                 project.getDirection().getEvent().getName(),
                 project.getDirection().getName(),
-                project.getCurator().getLastname()
+                project.getCurator().getLastname(),
+                project.getStartDate(),
+                project.getEndDate()
         );
     }
 }

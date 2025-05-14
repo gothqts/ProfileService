@@ -62,12 +62,14 @@ public class UserController {
     }
 
     @GetMapping("/my")
-    public ResponseEntity<UtilsDto<?, ?>> getAllMy(@RequestParam("role") String role){
+    public ResponseEntity<UtilsDto<?, ?>> getAllMy(){
 
         User user = userService.getAuthenticatedUser();
+        UserRole role = user.getRole();
+
         List<?> utils1;
         List<?> utils2;
-        if (role.equals(UserRole.LEADER.name())){
+        if (role.equals(UserRole.LEADER)){
             utils1 = directionService.getAllMy(userService.getAuthenticatedUser())
                     .stream().map(directionDtoConverter::toDto).toList();
 

@@ -54,7 +54,9 @@ public class UserRunner {
                     createUserWithProfile("student5@university.ru", "StudentPass123!", "Игорь", "Медведев", "Сергеевич", 3, "КФУ", "Искусственный интеллект", "@igor_medvedev", "vk.com/igor_med", UserRole.STUDENT),
                     createUserWithProfile("student6@university.ru", "StudentPass123!", "Виктория", "Павлова", "Олеговна", 2, "МФТИ", "Анализ данных", "@vika_pavlova", "vk.com/vika_pavlova", UserRole.STUDENT),
                     createUserWithProfile("student7@university.ru", "StudentPass123!", "Кирилл", "Белов", "Анатольевич", 1, "ВШЭ", "Кибербезопасность", "@kirill_belov", "vk.com/kirill_belov", UserRole.STUDENT),
-                    createUserWithProfile("student8@university.ru", "StudentPass123!", "Ангелина", "Тихонова", "Дмитриевна", 4, "ИТМО", "Веб-разработка", "@angelina_tikhonova", "vk.com/angelina_t", UserRole.STUDENT)
+                    createUserWithProfile("student8@university.ru", "StudentPass123!", "Ангелина", "Тихонова", "Дмитриевна", 4, "ИТМО", "Веб-разработка", "@angelina_tikhonova", "vk.com/angelina_t", UserRole.STUDENT),
+
+                    createUserWithProfile("organizer1@university.ru", "OrganizerPass123!", "Денис", "Смирнов", "Батькович", 6, "УрФУ", "Босс", "@smirnov_denis", "vk.com/denis_s", UserRole.ORGANIZER)
             );
             users.forEach(user -> {
                 Profile profile = user.getProfile();

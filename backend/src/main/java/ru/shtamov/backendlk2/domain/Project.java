@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ru.shtamov.backendlk2.domain.enums.Stage;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -41,6 +42,9 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "curator_id")
     private User curator;
+
+    private LocalDate startDate;
+    private LocalDate endDate;
 
 
 }

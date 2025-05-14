@@ -10,7 +10,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     open-in-view: true
 
 
@@ -22,3 +22,5 @@ jwt:
 springdoc:
   swagger-ui:
     url: /openapi-lk.yaml
+server:
+  port: 8081
