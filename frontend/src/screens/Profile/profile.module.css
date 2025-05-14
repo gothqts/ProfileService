@@ -11,8 +11,10 @@
     flex-direction: row;
     justify-content: space-between;
 }
-
-.table {
+.user_table{
+    margin-top: 70px;
+}
+.contacts {
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -25,36 +27,3 @@
     font-size: 35px;
 }
 
-.avatarContainer {
-    width: 363px;
-    height: 286px;
-    background: rgba(235, 235, 235, 0.7);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-}
-
-.avatarBlock {
-    background: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 161px;
-    height: 161px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.20);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    position: relative;
-}
-.link{
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    padding: 11px 27px;
-    background: var(--white2);
-    color: var(--black);
-}
-.link:active{
-    color: var(--black);
-}
