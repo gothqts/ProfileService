@@ -14,7 +14,7 @@ public class EventDtoConverter {
                 event.getId(),
                 event.getName(),
                 event.getDescription(),
-                Stage.valueOf(event.getStage()),
+                Stage.getStageByName(event.getStage()),
                 event.getStartDate(),
                 event.getEndDate(),
                 event.getDirections().stream().map(Direction::getName).toList()

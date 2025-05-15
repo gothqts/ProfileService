@@ -22,3 +22,5 @@ jwt:
 springdoc:
   swagger-ui:
     url: /openapi-lk.yaml
+server:
+  port: 8081
