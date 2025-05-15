@@ -24,7 +24,6 @@ const links: ILink[] = [
     path: urls.properties,
     name: 'ПВК',
   },
-
-
 ]
+
 export default links

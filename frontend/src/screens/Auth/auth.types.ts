@@ -23,6 +23,7 @@ export interface ILoginValues{
 export interface IUser {
   id: number,
   name: string,
+  patronymic: string,
   surname: string,
   university: string,
   speciality: string,

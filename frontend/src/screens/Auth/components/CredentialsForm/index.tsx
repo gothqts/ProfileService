@@ -19,6 +19,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
         {props.actionType === 'register' && (
           <>
             <TextInput
+              className="credentialsForm_input"
               placeholder="Имя"
               name="firstName"
               value={context.values.firstName}
@@ -27,6 +28,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <TextInput
+              className="credentialsForm_input"
               placeholder="Фамилия"
               name="lastName"
               value={context.values.lastName}
@@ -35,6 +37,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <TextInput
+              className="credentialsForm_input"
               placeholder="Номер телефона"
               name="phone"
               value={context.values.phone}
@@ -42,6 +45,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <TextInput
+              className="credentialsForm_input"
               placeholder="Почта"
               name="email"
               value={context.values.email}
@@ -50,6 +54,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <PasswordInput
+              className="credentialsForm_input"
               placeholder="Пароль"
               name="password"
               value={context.values.password}
@@ -57,6 +62,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <PasswordInput
+              className="credentialsForm_input"
               placeholder="Повторный пароль"
               name="repeatPassword"
               value={context.values.repeatPassword}
@@ -69,6 +75,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
         {props.actionType === 'login' && (
           <>
             <TextInput
+              className="credentialsForm_input"
               placeholder="Почта"
               name="email"
               value={context.values.email}
@@ -77,6 +84,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <PasswordInput
+              className="credentialsForm_input"
               placeholder="Пароль"
               name="password"
               value={context.values.password}

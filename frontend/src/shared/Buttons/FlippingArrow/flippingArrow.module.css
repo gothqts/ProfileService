@@ -1,0 +1,7 @@
+.flippingArrow {
+    transition: all 0.2s linear;
+}
+
+.flippingArrow[data-open='true'] {
+    transform: rotate(180deg);
+}

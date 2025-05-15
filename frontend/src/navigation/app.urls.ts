@@ -1,6 +1,6 @@
 export const urls = {
     profile: '/profile',
-    updateProfile: '/updateProfile/:id',
+    updateProfile: '/updateProfile',
     events: '/events',
     applications: '/applications',
     properties: '/properties',

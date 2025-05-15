@@ -1,0 +1,15 @@
+.formField {
+    display: flex;
+    align-items: center;
+}
+
+.label {
+    width: 45%;
+    font-size: 20px;
+    color: var(--gray);
+    white-space: nowrap;
+}
+
+.input {
+
+}

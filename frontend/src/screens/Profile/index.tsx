@@ -2,8 +2,10 @@ import styles from './profile.module.css'
 import { getUserInfo } from 'screens/Profile/profile.api.ts'
 import { useQuery } from '@tanstack/react-query'
 import { IUser } from 'screens/Auth/auth.types.ts'
-import OrganizerPage from 'screens/Profile/pages/OrganizerPage'
-import StudentPage from 'screens/Profile/pages/StudentPage'
+import OrganizerPage from 'screens/Profile/UpdateProfile/Pages/OrganizerPage'
+import StudentPage from 'screens/Profile/UpdateProfile/Pages/StudentPage'
+import CuratorPage from 'screens/Profile/UpdateProfile/Pages/CuratorPage'
+import LeaderPage from 'screens/Profile/UpdateProfile/Pages/LeaderPage'
 
 export const generateTableCells = (data: IUser) => ({
   about: [
@@ -18,16 +20,17 @@ export const generateTableCells = (data: IUser) => ({
   ],
   competencies: [
     { label: 'Специализация', value: data.specialization },
-    { label: 'Стек технологий', value: data.stack },
+    { label: 'Стек технологий', value: data.stack.join(", ") },
   ],
 })
 
 const Profile = () => {
+
+
   const { data, isSuccess } = useQuery({
     queryKey: ['profile'],
     queryFn: getUserInfo,
   })
-
 
   return (
     <div className={styles.container}>
@@ -39,6 +42,10 @@ const Profile = () => {
             cells={generateTableCells(data).contacts}
             user={data}
           />,
+          CURATOR: <CuratorPage user={data} />,
+          LEADER: <LeaderPage user={data} />
+
+
         }
         return roleComponents[data.userRole as keyof typeof roleComponents]
       })()}

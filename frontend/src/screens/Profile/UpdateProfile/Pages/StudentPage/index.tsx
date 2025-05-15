@@ -17,10 +17,7 @@ const projectsHeaders = {
 const Student = (props: IProps) => {
   return (
     <>
-      <div
-        className="user_info_container_tables"
-        style={{ marginBottom: '186px' }}
-      >
+      <div className="user_info_container"  style={{ marginBottom: '186px' }}>
         <div className="user_info_container_tables">
           <UserInfoTable
             header="О себе"

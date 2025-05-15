@@ -3,7 +3,7 @@ import { urls } from './app.urls.ts'
 import { IRoute } from './navigation.types.ts'
 
 const Profile = lazy(() => import('screens/Profile'))
-const UpdateProfile = lazy(() => import('screens/Profile/pages/UpdateProfile'))
+const UpdateProfile = lazy(() => import('screens/Profile/UpdateProfile'))
 
 const Events = lazy(() => import('screens/Events'))
 const Properties = lazy(() => import('screens/Properties'))
