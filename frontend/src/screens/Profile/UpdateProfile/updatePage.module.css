@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 62px;
+}
+.tabs{
+    height: 100vh;
+    padding-top: 43px;
+    margin-right: 53px;
+    margin-top: 70px;
+    width: 20%;
+    border-right:  1px solid rgba(0, 0, 0, 0.1);
+}
+.content{
+    width: 80%;
+}

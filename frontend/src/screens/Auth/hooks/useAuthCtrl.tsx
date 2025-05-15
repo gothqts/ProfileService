@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { generateEmptyAuthState } from 'screens/Auth/auth.context.ts'
 import { authApi } from 'screens/Auth/auth.api.ts'
-import { useAtom } from 'jotai'
+import { useSetAtom } from 'jotai'
 import { authAtom } from 'screens/Auth/auth.atom.ts'
 import { decode } from 'utils/decodeToken.ts'
 
@@ -12,7 +12,7 @@ interface IProps {
 
 const useAuthCtrl = (props: IProps) => {
   const [authValues, setAuthValues] = useState(generateEmptyAuthState())
-  const [authState, setAuthState] = useAtom(authAtom)
+  const setAuthState = useSetAtom(authAtom)
 
 
   const handleChange = (value: string, name: string) => {

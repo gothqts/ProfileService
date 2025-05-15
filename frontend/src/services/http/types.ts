@@ -15,4 +15,6 @@ export interface IErrorResponse {
   code: number | undefined
 }
 
-
+export type HTTPResponse<T = undefined> =
+  | IErrorResponse
+  | ISuccessResponse<T>

@@ -23,8 +23,14 @@
     border-radius: var(--border-radius);
     outline: none;
     font-size: 20px;
-    font-weight: 500;
+}
+.credentialsForm_input{
     border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.formField_input{
+    background: rgba(229, 229, 229, 0.3);
+    border: none;
+    font-weight: 400;
 }
 .table-orange-border{
     border-top: 1px solid var(--orange-border);
