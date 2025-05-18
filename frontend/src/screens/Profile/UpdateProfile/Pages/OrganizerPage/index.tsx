@@ -2,6 +2,9 @@ import UserInfoTable from 'screens/Profile/components/UserInfoTable'
 import AvatarContainer from 'screens/Profile/components/AvatarContainer'
 import { IUser } from 'screens/Auth/auth.types.ts'
 import Table from 'shared/Table'
+import { useEffect, useState } from 'react'
+import profileApi from 'screens/Profile/profile.api.ts'
+import { IEvent } from 'screens/Events/event.types.ts'
 
 interface IProps {
   cells: {
@@ -11,17 +14,29 @@ interface IProps {
   user: Pick<IUser, 'name' | 'surname'>
 }
 
-const projectsHeaders = {
-  event: 'Мероприятие',
-  directions: 'Направление',
-  theme: 'Тема',
-  teams: 'Команды',
+const tableHeaders = {
+  name: 'Тема',
+  directionsName: 'Направления',
+  startDate: 'Дата начала',
+  endDate: 'Дата конца',
 }
 
 const OrganizerPage = ({ cells, user }: IProps) => {
+  const [rows, setRows] = useState<IEvent[]>([])
+
+  useEffect(() => {
+    profileApi.getOrganizerEvents().then((resp) => {
+      if (resp.status === 'success') {
+        setRows(resp.body)
+      }
+    })
+  }, [])
   return (
     <>
-      <div className="user_info_container" style={{marginBottom: '186px'}}>
+      <div
+        className="user_info_container"
+        style={{ marginBottom: '186px' }}
+      >
         <div className="user_info_container_tables">
           <UserInfoTable
             header="Контактные данные"
@@ -37,23 +52,8 @@ const OrganizerPage = ({ cells, user }: IProps) => {
         <h2 className="user_info_container_header">Мероприятия</h2>
         <Table
           className="table-orange-border"
-          headers={projectsHeaders}
-          data={[
-            {
-              id: 1,
-              event: 'ПП весна 2025',
-              directions: 'Веб',
-              theme: 'Проект 1',
-              teams: 'Команда 1',
-            },
-            {
-              id: 2,
-              event: 'ПП осень 2025',
-              directions: 'Веб',
-              theme: 'Проект 1',
-              teams: 'Команда 1',
-            },
-          ]}
+          headers={tableHeaders}
+          data={rows}
         />
       </div>
     </>

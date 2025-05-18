@@ -8,9 +8,9 @@ interface IProps {
 const EventCard = ({ card }: IProps) => {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{card.title}</div>
+      <div className={styles.title}>{card.name}</div>
       <div className={styles.description}>{card.description}</div>
-      <div className={styles.date}>Сроки проведения: {card.date}</div>
+      <div className={styles.date}>Сроки проведения: {card.startDate} по {card.endDate}</div>
       <button className={styles.btn}>Узнать подробнее</button>
     </div>
   )

@@ -5,7 +5,9 @@ import { IUser } from 'screens/Auth/auth.types.ts'
 import Table from 'shared/Table'
 import CtrlPanel from 'shared/CtrlPanel'
 import { DepartmentLeadEntities } from 'screens/Profile/profile.enum.ts'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import profileApi from 'screens/Profile/profile.api.ts'
+import { ILeaderProjectsAndDirections } from 'screens/Profile/profile.types.ts'
 
 const directionHeaders = {
   directions: 'Направление',
@@ -26,6 +28,14 @@ interface IProps {
 }
 
 const LeaderPage = (props: IProps) => {
+  const [rows, setRows] = useState<ILeaderProjectsAndDirections>()
+  useEffect(() => {
+    profileApi.getLeaderProjectsAndDirections().then((resp)=>{
+      if(resp.status==='success'){
+
+      }
+    })
+  }, [])
   const [ctrlPanelState, setCtrlPanelStat] = useState(DepartmentLeadEntities.directions)
 
   const handleToggle = () => {
