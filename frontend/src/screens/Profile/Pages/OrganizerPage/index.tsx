@@ -4,7 +4,7 @@ import { IUser } from 'screens/Auth/auth.types.ts'
 import Table from 'shared/Table'
 import { useEffect, useState } from 'react'
 import profileApi from 'screens/Profile/profile.api.ts'
-import { IEvent } from 'screens/Events/event.types.ts'
+import { IOrganizerEvent } from 'screens/Profile/profile.types.ts'
 
 interface IProps {
   cells: {
@@ -15,28 +15,40 @@ interface IProps {
 }
 
 const tableHeaders = {
-  name: 'Тема',
+  topic: 'Тема',
   directionsName: 'Направления',
   startDate: 'Дата начала',
   endDate: 'Дата конца',
 }
 
 const OrganizerPage = ({ cells, user }: IProps) => {
-  const [rows, setRows] = useState<IEvent[]>([])
+  const [rows, setRows] = useState<IOrganizerEvent[]>([])
 
   useEffect(() => {
     profileApi.getOrganizerEvents().then((resp) => {
       if (resp.status === 'success') {
-        setRows(resp.body)
+        const formattedData: IOrganizerEvent[] = resp.body.utils1.map(event => ({
+          topic: event.topic,
+          directionsName: event.directionsName,
+          startDate: event.startDate,
+          endDate: event.endDate,
+        }))
+        setRows(formattedData)
       }
     })
   }, [])
+
+  const formatDirections = (directions: string[]) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      {directions.map((dir, index) => (
+        <span key={index}>{dir}</span>
+      ))}
+    </div>
+  )
+
   return (
     <>
-      <div
-        className="user_info_container"
-        style={{ marginBottom: '186px' }}
-      >
+      <div className="user_info_container" style={{ marginBottom: '186px' }}>
         <div className="user_info_container_tables">
           <UserInfoTable
             header="Контактные данные"
@@ -53,7 +65,10 @@ const OrganizerPage = ({ cells, user }: IProps) => {
         <Table
           className="table-orange-border"
           headers={tableHeaders}
-          data={rows}
+          data={rows.map(row => ({
+            ...row,
+            directionsName: formatDirections(row.directionsName),
+          }))}
         />
       </div>
     </>

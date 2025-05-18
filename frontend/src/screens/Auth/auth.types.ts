@@ -14,7 +14,7 @@ export interface IAuth{
 
 export interface IAuthState {
   auth: IAuth,
-  user: IUser | null
+  user: IUser
 }
 export interface ILoginValues{
   email: string,

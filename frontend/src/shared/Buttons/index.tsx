@@ -1,17 +1,21 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react'
 import cn from 'utils/cn.ts'
 
-interface IProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-
+export interface IButtonProps
+  extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
 }
 
-const Button = (props: PropsWithChildren<IProps>) => {
+const Button = ({
+  children,
+  ...props
+}: PropsWithChildren<IButtonProps>) => {
   return (
     <button
+      {...props}
       type={props.type ? props.type : 'button'}
       className={cn(props.className ?? '', 'button')}
     >
-      {props.children}
+      <div>{children}</div>
     </button>
   )
 }

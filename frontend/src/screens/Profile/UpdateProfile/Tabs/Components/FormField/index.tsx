@@ -6,7 +6,7 @@ interface IProps {
   placeholder: string,
   onChange: (value: string, name: string) => void
   name: string,
-  value?: string
+  value: string
 }
 
 const FormField = (props: PropsWithChildren<IProps>) => {
@@ -18,6 +18,7 @@ const FormField = (props: PropsWithChildren<IProps>) => {
         name={props.name}
         onChange={props.onChange}
         value={props.value}
+        placeholder={props.placeholder}
       />
     </div>
   )

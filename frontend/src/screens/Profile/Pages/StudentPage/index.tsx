@@ -1,37 +1,43 @@
 import UserInfoTable from 'screens/Profile/components/UserInfoTable'
+import { generateTableCells } from 'screens/Profile'
+import { IUser } from 'screens/Auth/auth.types.ts'
 import AvatarContainer from 'screens/Profile/components/AvatarContainer'
 import Table from 'shared/Table'
-import { IUser } from 'screens/Auth/auth.types.ts'
-import { generateTableCells } from 'screens/Profile'
 import { useEffect, useState } from 'react'
 import profileApi from 'screens/Profile/profile.api.ts'
-import { ITableCuratorProject } from 'screens/Profile/profile.types.ts'
+import { ITableStudentProject } from 'screens/Profile/profile.types.ts'
+
 
 interface IProps {
   user: IUser
 }
-
 const projectsHeaders = {
   eventName: 'Мероприятие',
   topic: 'Тема проекта',
   date: 'Сроки',
-  teams: 'Команды',
+  curatorName: 'Куратор',
 }
-const CuratorPage = (props: IProps) => {
-  const [rows, setRows] = useState<ITableCuratorProject[]>([])
+
+const Student = (props: IProps) => {
+  const [rows, setRows]=useState<ITableStudentProject[]>([])
   useEffect(() => {
-    profileApi.getCuratorProjects().then((resp)=>{
-      if (resp.status==='success'){
-        setRows(resp.body)
+    profileApi.getStudentProjectsAndTeams().then((resp) => {
+      if (resp.status === 'success') {
+        const formattedData = resp.body.utils2.map(project => ({
+          id: project.id,
+          eventName: project.eventName,
+          topic: project.topic,
+          date: `${project.startTime} - ${project.endTime}`,
+          curatorName: project.curatorName
+
+        }));
+        setRows(formattedData);
       }
-    })
-  }, [])
+    });
+  }, []);
   return (
     <>
-      <div
-        className="user_info_container"
-        style={{ marginBottom: '186px' }}
-      >
+      <div className="user_info_container"  style={{ marginBottom: '186px' }}>
         <div className="user_info_container_tables">
           <UserInfoTable
             header="О себе"
@@ -52,30 +58,15 @@ const CuratorPage = (props: IProps) => {
         />
       </div>
       <div style={{ marginBottom: '186px' }}>
-        <h2 className="user_info_container_header">Курируемые проекты</h2>
+        <h2 className="user_info_container_header">Проекты</h2>
         <Table
           className="table-orange-border"
           headers={projectsHeaders}
-          data={[
-            {
-              id: 1,
-              event: 'ПП весна 2025',
-              directions: 'Веб',
-              theme: 'Проект 1',
-              teams: 'Команда 1',
-            },
-            {
-              id: 2,
-              event: 'ПП осень 2025',
-              directions: 'Веб',
-              theme: 'Проект 1',
-              teams: 'Команда 1',
-            },
-          ]}
+          data={rows}
         />
       </div>
     </>
   )
 }
 
-export default CuratorPage
+export default Student

@@ -14,15 +14,7 @@ export interface IStudentProjectsAndTeams {
   utils2: IStudentProject[]
 }
 export type ICuratorProjectsAndTeams = IStudentProjectsAndTeams
-
-export interface IPasswordsValues {
-
-}
-
-export interface IContactsValues {
-
-}
-
+export type ILeaderProjects = IStudentProject[]
 export interface ILeaderProjectsAndDirections {
   utils1: ILeaderDirection[],
   utils2: IStudentProject[],
@@ -43,6 +35,7 @@ export interface IStudentProject {
   teamName: string,
   startTime: string,
   endTime: string,
+  curatorName: string,
 }
 export interface ITableStudentProject{
   id: number,
@@ -56,7 +49,7 @@ export interface ITableCuratorProject {
   eventName: string,
   topic: string,
   date: string,
-  teams: string[]
+  teamName: string
 }
 export interface ILeaderDirection{
   id: number,
@@ -64,4 +57,24 @@ export interface ILeaderDirection{
   eventName: string,
   projectsName: string[],
   teamsName: string[],
+}
+export interface IOrganizerEvent {
+  topic: string,
+  directionsName: string[],
+  startDate: string,
+  endDate: string,
+}
+export interface IOrganizerEvents {
+  utils1: IOrganizerEvent[],
+  utils2: any[],
+}
+export interface IStack {
+  name: string,
+}
+export interface ISpecialization {
+  name: string,
+}
+export interface ICourse {
+  name: string,
+  value: string,
 }

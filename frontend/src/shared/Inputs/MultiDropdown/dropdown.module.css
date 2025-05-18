@@ -10,7 +10,7 @@
 
 .input {
     outline: none;
-    background: #ededff;
+    background: white;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -18,14 +18,34 @@
     min-width: 226px;
     padding: 13px 16px;
     padding-right: 45px;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px 0 #c9cdd2;
-    border: 1px solid #c9cdd2;
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 3px 0 var(--border);
+    border: 1px solid var(--border);
+    font-size: 14px;
     line-height: 20px;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 16px;
-    color: #6f7786;
+}
+
+.input[data-size="small"] {
+    padding: 4px 8px;
+    width: 200px;
+    max-width: max-content;
+}
+
+.input[data-disabled="true"] {
+    cursor: not-allowed;
+    background: var(--background);
+    color: var(--text-disabled);
+}
+
+.input[data-open="true"] {
+    border: 1px solid var(--primary);
+}
+
+.input[data-error='true'] {
+    border: 1px solid var(--error);
+    color: var(--error);
 }
 
 .arrow {
@@ -41,8 +61,9 @@
     margin-top: 8px;
     padding: 6px 0;
     position: absolute;
-    border-radius: 8px;
-    border: 1px solid #dbdcde;
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 3px 0 var(--border);
+    border: 1px solid var(--border);
     background: var(--white);
 }
 
@@ -55,34 +76,7 @@
 }
 
 .item:hover {
-    background: #dbdcde;
-}
-
-.menuOption {
-    padding: 10px 16px;
-    cursor: pointer;
-    line-height: 20px;
-    font-weight: 600;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.menuOption[data-active='true'] {
-    background: rgba(47, 43, 67, 0.05);
-}
-
-.menuOption:hover {
-    background: rgba(58, 53, 65, 0.3);
-    color: var(--white);
-}
-
-.menuOption:active {
-    background: #89868d;
-}
-
-.selectedOption {
-    background: #ededff;
-    color: #6f7786;
+    background: var(--border);
 }
 
 @keyframes growDown {

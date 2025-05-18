@@ -1,22 +1,25 @@
 import styles from './updatePage.module.css'
 import MyProfile from 'screens/Profile/UpdateProfile/Tabs/MyProfile'
-import { useQuery } from '@tanstack/react-query'
-import { getUserInfo } from 'screens/Profile/profile.api.ts'
 import { useAtom } from 'jotai/index'
 import { authAtom } from 'screens/Auth/auth.atom.ts'
 import { useEffect } from 'react'
+import profileApi from 'screens/Profile/profile.api.ts'
 
 const UpdateProfile = () => {
-  const { data, isSuccess } = useQuery({
-    queryKey: ['updateProfile'],
-    queryFn: getUserInfo,
-  })
-  const [profileValues, setProfileValues] = useAtom(authAtom)
+  const [userData, setUserData] = useAtom(authAtom)
   useEffect(() => {
-    if (isSuccess && data) {
-      setProfileValues({ ...profileValues, user: data })
+    if (!userData.user.userRole) {
+      profileApi.getUserInfo().then((resp) => {
+        if (resp.status === 'success') {
+          setUserData((prev) => ({
+            ...prev,
+            user: resp.body,
+          }))
+
+        }
+      })
     }
-  }, [data, isSuccess])
+  }, [])
   return (
     <div className={styles.container}>
       <div
@@ -28,14 +31,11 @@ const UpdateProfile = () => {
         <div>Сменить пароль</div>
         <button>Удалить профиль</button>
       </div>
-      {isSuccess ? (<div className={styles.content}>
-        <MyProfile />
-      </div>) : null}
-
-      <div>
-
+      <div className={styles.content}>
+        {
+          userData.user.name ? <MyProfile /> : null
+        }
       </div>
-
     </div>
   )
 }

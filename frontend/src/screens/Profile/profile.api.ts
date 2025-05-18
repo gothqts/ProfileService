@@ -2,10 +2,9 @@ import http, { handleErrorResponse, handleHttpResponse } from 'services/http'
 import config from '../../config.ts'
 import { IUser } from 'screens/Auth/auth.types.ts'
 import { HTTPResponse } from 'services/http/types.ts'
-import { IEvent } from 'screens/Events/event.types.ts'
 import {
   ICuratorProjectsAndTeams,
-  ILeaderProjectsAndDirections,
+  ILeaderProjectsAndDirections, IOrganizerEvents, ISpecialization, IStack,
   IStudentProjectsAndTeams,
 } from 'screens/Profile/profile.types.ts'
 
@@ -29,16 +28,25 @@ const getLeaderProjectsAndDirections = (): Promise<HTTPResponse<ILeaderProjectsA
 }
 
 
-const getOrganizerEvents = (): Promise<HTTPResponse<IEvent[]>> => {
+const getOrganizerEvents = (): Promise<HTTPResponse<IOrganizerEvents>> => {
   return http.get(config.API_URL + '/users/my?role=organizer').then(handleHttpResponse).catch(handleErrorResponse)
 }
 
+const getStacks = () :Promise<HTTPResponse<IStack[]>> =>{
+  return http.get(config.API_URL + '/stacks').then(handleHttpResponse).catch(handleErrorResponse)
+}
+const getSpecializations = (): Promise<HTTPResponse<ISpecialization[]>> =>{
+  return http.get(config.API_URL + '/specializations').then(handleHttpResponse).catch(handleErrorResponse)
+}
 const profileApi = {
   getUserInfo,
   putUserInfo,
   getStudentProjectsAndTeams,
   getLeaderProjectsAndDirections,
   getOrganizerEvents,
-  getCuratorProjects
+  getCuratorProjects,
+  getStacks,
+  getSpecializations,
+
 }
 export default profileApi
