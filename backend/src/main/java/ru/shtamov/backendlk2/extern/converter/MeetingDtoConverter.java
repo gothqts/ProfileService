@@ -15,4 +15,5 @@ public class MeetingDtoConverter {
                 meeting.getProject().getTeam().getName()
         );
     }
+
 }

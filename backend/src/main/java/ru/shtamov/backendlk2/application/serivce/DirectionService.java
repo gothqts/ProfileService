@@ -31,7 +31,7 @@ public class DirectionService {
 
         List<Direction> events = directionRepository.findAll().stream().filter(d -> d.getLeader().getId().equals(user.getId())).toList();
 
-        log.info("ProjectService: Найдены все мероприятия для ЛК");
+        log.info("DirectionService: Найдены все направления для ЛК");
         return events;
     }
 }

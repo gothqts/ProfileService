@@ -32,5 +32,9 @@ public class Event {
 
     @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Direction> directions;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User organizer;
     
 }

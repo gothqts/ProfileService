@@ -5,19 +5,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.shtamov.backendlk2.application.serivce.DirectionService;
-import ru.shtamov.backendlk2.application.serivce.ProjectService;
-import ru.shtamov.backendlk2.application.serivce.TeamService;
-import ru.shtamov.backendlk2.application.serivce.UserService;
+import ru.shtamov.backendlk2.application.serivce.*;
 import ru.shtamov.backendlk2.domain.Profile;
 import ru.shtamov.backendlk2.domain.User;
 import ru.shtamov.backendlk2.domain.enums.UserRole;
-import ru.shtamov.backendlk2.extern.converter.DirectionDtoConverter;
-import ru.shtamov.backendlk2.extern.converter.ProjectDtoConverter;
-import ru.shtamov.backendlk2.extern.converter.TeamDtoConverter;
-import ru.shtamov.backendlk2.extern.converter.UserDtoConverter;
+import ru.shtamov.backendlk2.extern.converter.*;
 import ru.shtamov.backendlk2.extern.dto.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -30,9 +25,11 @@ public class UserController {
     private final DirectionService directionService;
     private final ProjectService projectService;
     private final TeamService teamService;
+    private final EventService eventService;
     private final ProjectDtoConverter projectDtoConverter;
     private final DirectionDtoConverter directionDtoConverter;
     private final TeamDtoConverter teamDtoConverter;
+    private final EventDtoConverter eventDtoConverter;
 
 
     @PostMapping
@@ -67,17 +64,23 @@ public class UserController {
         User user = userService.getAuthenticatedUser();
         UserRole role = user.getRole();
 
-        List<?> utils1;
-        List<?> utils2;
-        if (role.equals(UserRole.LEADER)){
+        List<?> utils1 = new ArrayList<>();
+        List<?> utils2 = new ArrayList<>();
+
+        if (role.equals(UserRole.ORGANIZER)){
+            utils1 = eventService.getAllMy(user)
+                    .stream().map(eventDtoConverter::toLkDto).toList();
+        }
+        else if (role.equals(UserRole.LEADER)){
             utils1 = directionService.getAllMy(userService.getAuthenticatedUser())
                     .stream().map(directionDtoConverter::toDto).toList();
-
         }else {
             utils1 = teamService.getAllMy(user)
                     .stream().map(teamDtoConverter::toDto).toList();
         }
-        utils2 = projectService.getAllMy(user)
+
+        if (!role.equals(UserRole.ORGANIZER))
+            utils2 = projectService.getAllMy(user)
                 .stream().map(projectDtoConverter::toLkDto).toList();
 
         UtilsDto<?, ?> utilsDto = new UtilsDto<>(utils1, utils2);

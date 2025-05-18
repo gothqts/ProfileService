@@ -34,7 +34,7 @@ public class ProjectService {
             projects = user.getTeams().stream().map(Team::getProject).toList();
         }
 
-        log.info("ProjectService: Найдены все мероприятия для ЛК");
+        log.info("ProjectService: Найдены все проекты для ЛК");
         return projects;
     }
 

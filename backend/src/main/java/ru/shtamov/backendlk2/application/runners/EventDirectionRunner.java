@@ -52,6 +52,8 @@ public class EventDirectionRunner {
                     ur.findById(16L).orElseThrow()  // Студент 8
             );
 
+            User org = ur.findById(17L).orElseThrow();
+
             // Первое мероприятие - Весенний хакатон
             Event springHackathon = new Event(
                     null,
@@ -60,7 +62,8 @@ public class EventDirectionRunner {
                     Stage.CONDUCTING.getName(),
                     LocalDate.of(2025, 3, 15),
                     LocalDate.of(2025, 5, 20),
-                    new ArrayList<>()
+                    new ArrayList<>(),
+                    org
             );
             springHackathon = er.save(springHackathon);
 
@@ -211,7 +214,8 @@ public class EventDirectionRunner {
                     Stage.RECRUITMENT.getName(),
                     LocalDate.of(2025, 9, 1),
                     LocalDate.of(2025, 12, 15),
-                    new ArrayList<>()
+                    new ArrayList<>(),
+                    org
             );
             autumnMarathon = er.save(autumnMarathon);
 
@@ -295,6 +299,9 @@ public class EventDirectionRunner {
             Team team6 = auditTool.getTeam();
             team6.setProject(auditTool);
             tr.save(team6);
+
+
+
         }
     }
 }

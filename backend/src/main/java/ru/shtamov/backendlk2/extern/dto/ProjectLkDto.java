@@ -9,6 +9,7 @@ public record ProjectLkDto(
         String directionName,
         String topic,
         String teamName,
+        String curatorName,
         LocalDate startTime,
         LocalDate endTime
 ) {
