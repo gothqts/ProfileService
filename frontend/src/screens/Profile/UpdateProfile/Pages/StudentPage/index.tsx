@@ -3,18 +3,36 @@ import { generateTableCells } from 'screens/Profile'
 import { IUser } from 'screens/Auth/auth.types.ts'
 import AvatarContainer from 'screens/Profile/components/AvatarContainer'
 import Table from 'shared/Table'
+import { useEffect, useState } from 'react'
+import profileApi from 'screens/Profile/profile.api.ts'
+import { ITableStudentProject } from 'screens/Profile/profile.types.ts'
+
 
 interface IProps {
   user: IUser
 }
 const projectsHeaders = {
-  event: 'Мероприятие',
-  directions: 'Направление',
-  theme: 'Тема',
-  teams: 'Команды',
+  eventName: 'Мероприятие',
+  topic: 'Тема проекта',
+  date: 'Сроки',
+  curatorName: 'Куратор',
 }
 
 const Student = (props: IProps) => {
+  const [rows, setRows]=useState<ITableStudentProject[]>([])
+  useEffect(() => {
+    profileApi.getStudentProjectsAndTeams().then((resp) => {
+      if (resp.status === 'success') {
+        const formattedData = resp.body.utils2.map(project => ({
+          id: project.id,
+          eventName: project.eventName,
+          topic: project.topic,
+          date: `${project.startTime} - ${project.endTime}`
+        }));
+        setRows(formattedData);
+      }
+    });
+  }, []);
   return (
     <>
       <div className="user_info_container"  style={{ marginBottom: '186px' }}>
@@ -42,22 +60,7 @@ const Student = (props: IProps) => {
         <Table
           className="table-orange-border"
           headers={projectsHeaders}
-          data={[
-            {
-              id: 1,
-              event: 'ПП весна 2025',
-              directions: 'Веб',
-              theme: 'Проект 1',
-              teams: 'Команда 1',
-            },
-            {
-              id: 2,
-              event: 'ПП осень 2025',
-              directions: 'Веб',
-              theme: 'Проект 1',
-              teams: 'Команда 1',
-            },
-          ]}
+          data={rows}
         />
       </div>
     </>

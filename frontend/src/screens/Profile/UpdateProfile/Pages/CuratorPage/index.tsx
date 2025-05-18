@@ -3,18 +3,29 @@ import AvatarContainer from 'screens/Profile/components/AvatarContainer'
 import Table from 'shared/Table'
 import { IUser } from 'screens/Auth/auth.types.ts'
 import { generateTableCells } from 'screens/Profile'
+import { useEffect, useState } from 'react'
+import profileApi from 'screens/Profile/profile.api.ts'
+import { ITableCuratorProject } from 'screens/Profile/profile.types.ts'
 
 interface IProps {
   user: IUser
 }
 
 const projectsHeaders = {
-  event: 'Мероприятие',
-  directions: 'Направление',
-  theme: 'Тема',
+  eventName: 'Мероприятие',
+  topic: 'Тема проекта',
+  date: 'Сроки',
   teams: 'Команды',
 }
 const CuratorPage = (props: IProps) => {
+  const [rows, setRows] = useState<ITableCuratorProject[]>([])
+  useEffect(() => {
+    profileApi.getCuratorProjects().then((resp)=>{
+      if (resp.status==='success'){
+        setRows(resp.body)
+      }
+    })
+  }, [])
   return (
     <>
       <div

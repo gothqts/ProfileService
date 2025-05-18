@@ -2,10 +2,8 @@ import styles from './table.module.css'
 import cn from 'utils/cn.ts'
 import { CSSProperties } from 'react'
 
-type OmitKeys<T, K extends keyof T> = Omit<Record<keyof T, string>, K>
-
 interface ITableProps<T extends Record<string, any>> {
-  headers: OmitKeys<T, 'id'>;
+  headers: Partial<Record<keyof T, string>>;
   data: T[];
   className?: string;
   style?: CSSProperties;
@@ -26,16 +24,18 @@ const Table = <T extends Record<string, any>>(props: ITableProps<T>) => {
         ))}
       </tr>
       </thead>
+      {
+        props.data.length > 0 ? <tbody>
+        {props.data.map((item, index) => (
+          <tr key={index}>
+            {headerKeys.map(key => (
+              <td key={`${index}-${String(key)}`}>{item[key]}</td>
+            ))}
+          </tr>
+        ))}
+        </tbody> : null
+      }
 
-      <tbody>
-      {props.data.map((item, index) => (
-        <tr key={index}>
-          {headerKeys.map(key => (
-            <td key={`${index}-${String(key)}`}>{item[key]}</td>
-          ))}
-        </tr>
-      ))}
-      </tbody>
     </table>
   )
 }

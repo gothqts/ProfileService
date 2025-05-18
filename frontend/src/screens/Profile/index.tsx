@@ -1,11 +1,13 @@
 import styles from './profile.module.css'
-import { getUserInfo } from 'screens/Profile/profile.api.ts'
-import { useQuery } from '@tanstack/react-query'
+import profileApi from 'screens/Profile/profile.api.ts'
 import { IUser } from 'screens/Auth/auth.types.ts'
 import OrganizerPage from 'screens/Profile/UpdateProfile/Pages/OrganizerPage'
 import StudentPage from 'screens/Profile/UpdateProfile/Pages/StudentPage'
 import CuratorPage from 'screens/Profile/UpdateProfile/Pages/CuratorPage'
 import LeaderPage from 'screens/Profile/UpdateProfile/Pages/LeaderPage'
+import { useEffect } from 'react'
+import { useAtom } from 'jotai/index'
+import { authAtom } from 'screens/Auth/auth.atom.ts'
 
 export const generateTableCells = (data: IUser) => ({
   about: [
@@ -20,34 +22,43 @@ export const generateTableCells = (data: IUser) => ({
   ],
   competencies: [
     { label: 'Специализация', value: data.specialization },
-    { label: 'Стек технологий', value: data.stack.join(", ") },
+    { label: 'Стек технологий', value: data.stack?.join(', ') },
   ],
 })
 
+
 const Profile = () => {
+  const [user, setUser] = useAtom(authAtom)
 
 
-  const { data, isSuccess } = useQuery({
-    queryKey: ['profile'],
-    queryFn: getUserInfo,
-  })
+  useEffect(() => {
+    profileApi.getUserInfo().then(resp => {
+      if (resp.status === 'success') {
+        setUser(prev => ({
+          ...prev,
+          user: resp.body,
+        }))
+      }
+    })
+
+  }, [])
+
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>Личный кабинет пользователя</div>
-      {isSuccess && data && (() => {
+      {user.user && (() => {
         const roleComponents = {
-          STUDENT: <StudentPage user={data} />,
+          STUDENT: <StudentPage user={user.user} />,
           ORGANIZER: <OrganizerPage
-            cells={generateTableCells(data).contacts}
-            user={data}
+            cells={generateTableCells(user.user).contacts}
+            user={user.user}
           />,
-          CURATOR: <CuratorPage user={data} />,
-          LEADER: <LeaderPage user={data} />
-
+          CURATOR: <CuratorPage user={user.user} />,
+          LEADER: <LeaderPage user={user.user} />,
 
         }
-        return roleComponents[data.userRole as keyof typeof roleComponents]
+        return roleComponents[user.user?.userRole as keyof typeof roleComponents]
       })()}
     </div>
   )

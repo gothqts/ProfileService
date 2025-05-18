@@ -8,12 +8,21 @@
 
 .events_list {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 50px;
+    margin-bottom: 150px;
 }
-
+.events_list::after{
+    content: "";
+    width: 335px;
+    height: 0;
+    margin-top: 60px;
+    text-align: center;
+}
+.table{
+    margin-bottom: 150px;
+}
 .menu {
     display: flex;
     margin-bottom: 75px;

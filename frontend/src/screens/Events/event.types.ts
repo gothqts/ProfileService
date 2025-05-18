@@ -1,13 +1,21 @@
 export interface IEvent {
   id: number,
-  title: string;
-  description: string;
-  date: string;
+  name: string,
+  description: string,
+  stage: string,
+  startDate: string,
+  endDate: string,
+  directionsName: string[],
 }
+
 export interface IProject {
   id: number;
-  theme: string;
-  event: string;
-  direction: string;
-  curator: string;
+  topic: string;
+  eventName: string;
+  directionName: string;
+  curatorName: string;
+  startTime: string;
+  endTime: string;
 }
+
+export type ProjectWithoutTimestamps = Omit<IProject, 'startTime' | 'endTime'>;
