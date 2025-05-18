@@ -8,6 +8,21 @@ const generateEmptyState = () => ({
     expires: Number(decode(localStorage.getItem('token'))?.exp),
     role: String((decode(localStorage.getItem('token'))?.role)),
   },
-  user: null,
+  user: {
+    id: 0,
+    name: '',
+    patronymic: '',
+    surname: '',
+    university: '',
+    speciality: '',
+    course: 0,
+    telegram: '',
+    email: '',
+    vk: '',
+    specialization: '',
+    stack: [],
+    userRole: '',
+    token: '',
+  },
 })
 export const authAtom = atom<IAuthState>(generateEmptyState())

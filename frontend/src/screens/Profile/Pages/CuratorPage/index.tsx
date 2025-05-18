@@ -1,41 +1,45 @@
 import UserInfoTable from 'screens/Profile/components/UserInfoTable'
-import { generateTableCells } from 'screens/Profile'
-import { IUser } from 'screens/Auth/auth.types.ts'
 import AvatarContainer from 'screens/Profile/components/AvatarContainer'
 import Table from 'shared/Table'
+import { IUser } from 'screens/Auth/auth.types.ts'
+import { generateTableCells } from 'screens/Profile'
 import { useEffect, useState } from 'react'
 import profileApi from 'screens/Profile/profile.api.ts'
-import { ITableStudentProject } from 'screens/Profile/profile.types.ts'
-
+import { ITableCuratorProject } from 'screens/Profile/profile.types.ts'
 
 interface IProps {
   user: IUser
 }
+
 const projectsHeaders = {
   eventName: 'Мероприятие',
   topic: 'Тема проекта',
   date: 'Сроки',
-  curatorName: 'Куратор',
+  teamName: 'Команды',
 }
-
-const Student = (props: IProps) => {
-  const [rows, setRows]=useState<ITableStudentProject[]>([])
+const CuratorPage = (props: IProps) => {
+  const [rows, setRows] = useState<ITableCuratorProject[]>([])
   useEffect(() => {
-    profileApi.getStudentProjectsAndTeams().then((resp) => {
+    profileApi.getCuratorProjects().then((resp) => {
       if (resp.status === 'success') {
         const formattedData = resp.body.utils2.map(project => ({
           id: project.id,
           eventName: project.eventName,
           topic: project.topic,
-          date: `${project.startTime} - ${project.endTime}`
-        }));
-        setRows(formattedData);
+          date: `${project.startTime} - ${project.endTime}`,
+          teamName: project.teamName,
+
+        }))
+        setRows(formattedData)
       }
-    });
-  }, []);
+    })
+  }, [])
   return (
     <>
-      <div className="user_info_container"  style={{ marginBottom: '186px' }}>
+      <div
+        className="user_info_container"
+        style={{ marginBottom: '186px' }}
+      >
         <div className="user_info_container_tables">
           <UserInfoTable
             header="О себе"
@@ -56,7 +60,7 @@ const Student = (props: IProps) => {
         />
       </div>
       <div style={{ marginBottom: '186px' }}>
-        <h2 className="user_info_container_header">Проекты</h2>
+        <h2 className="user_info_container_header">Курируемые проекты</h2>
         <Table
           className="table-orange-border"
           headers={projectsHeaders}
@@ -67,4 +71,4 @@ const Student = (props: IProps) => {
   )
 }
 
-export default Student
+export default CuratorPage
