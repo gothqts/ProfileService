@@ -48,13 +48,19 @@ const useAuthCtrl = (props: IProps) => {
     } else if (props.actionType === 'register') {
       authApi.register(authValues).then((resp) => {
         if (resp.status === 'success') {
-          setAuthState((prev) => ({
-            ...prev,
-            auth: {
-              ...prev.auth,
-              accessToken: resp.body.jwt,
-            },
-          }))
+          const decodedJWT = decode(resp.body.jwt)
+          if (decodedJWT) {
+            setAuthState((prev) => ({
+              ...prev,
+              auth: {
+                ...prev.auth,
+                accessToken: resp.body.jwt,
+                expires: decodedJWT.exp,
+                role: decodedJWT.role,
+              },
+            }))
+          }
+          localStorage.setItem('token', resp.body.jwt)
         } else if (resp.status === 'error') {
           console.log(resp.message)
         }

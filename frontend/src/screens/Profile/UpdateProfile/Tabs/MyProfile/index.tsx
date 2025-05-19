@@ -4,6 +4,11 @@ import FormFieldDropdown from 'screens/Profile/UpdateProfile/Tabs/Components/For
 import useProfileFormCtrl from 'screens/Profile/UpdateProfile/Tabs/MyProfile/hooks/useProfileFormCtrl.tsx'
 import Button from 'shared/Buttons'
 import FormFieldMultiDropdown from 'screens/Profile/UpdateProfile/Tabs/Components/FormFieldMultiDropdown'
+import { useState } from 'react'
+import Modal from 'shared/Modal'
+import CreateItemForm from 'screens/Profile/UpdateProfile/Tabs/MyProfile/Components/CreateItemForm'
+import CreateItemContext from 'screens/Profile/UpdateProfile/Tabs/MyProfile/myProfileContext.tsx'
+import useCreateItemCtrl from 'screens/Profile/UpdateProfile/Tabs/MyProfile/hooks/useCreateItemCtrl.tsx'
 
 const MyProfile = () => {
   const {
@@ -12,13 +17,24 @@ const MyProfile = () => {
     options,
     handleSubmitCredentials,
   } = useProfileFormCtrl()
+
+  const isOrganizer = profileValues.auth?.role === 'ORGANIZER'
+  const [actionType, setActionType] = useState<'stack' | 'specialization'>('stack')
+  const formCtrl = useCreateItemCtrl({ actionType })
+
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmitCredentials}>
+      {/* Основная форма профиля */}
+      <form
+        className={styles.form}
+        onSubmit={handleSubmitCredentials}
+      >
         <h2
           className={styles.header}
           style={{ marginBottom: '43px' }}
-        >Личная информация</h2>
+        >
+          Личная информация
+        </h2>
 
         <div
           className={styles.form_body}
@@ -44,7 +60,7 @@ const MyProfile = () => {
 
           <FormField
             name="patronymic"
-            placeholder="Отчетсво"
+            placeholder="Отчество"
             value={profileValues.user.patronymic}
             onChange={handleChange}
           >
@@ -60,53 +76,75 @@ const MyProfile = () => {
             Учебное заведение
           </FormField>
 
-          <FormField
-            name="speciality"
-            placeholder="Специальность"
-            value={profileValues.user.speciality}
-            onChange={handleChange}
-          >
-            Специальность
-          </FormField>
+          {!isOrganizer && (
+            <>
+              <FormField
+                name="speciality"
+                placeholder="Специальность"
+                value={profileValues.user.speciality}
+                onChange={handleChange}
+              >
+                Специальность
+              </FormField>
 
-          <FormFieldDropdown
-            selectedOption={`${profileValues.user.course} курс`}
-            onSelect={handleChange}
-            name="course"
-            options={options.course}
-          >
-            Курс
-          </FormFieldDropdown>
-
+              <FormFieldDropdown
+                selectedOption={profileValues.user.course ? `${profileValues.user.course} курс` : ''}
+                onSelect={handleChange}
+                name="course"
+                options={options.course}
+                placeholder="Курс"
+              >
+                Курс
+              </FormFieldDropdown>
+            </>
+          )}
         </div>
-        <h2
-          className={styles.header}
-          style={{ marginBottom: '43px' }}
-        >Компетенции</h2>
-        <div
-          className={styles.form_body}
-          style={{ marginBottom: '70px' }}
-        >
-          <FormFieldDropdown
-            selectedOption={profileValues.user.specialization}
-            onSelect={handleChange}
-            name="specialization"
-            options={options.specializations}
-            placeholder="Выберите специализацию"
-          >
-            Специализация
-          </FormFieldDropdown>
 
-          <FormFieldMultiDropdown
-            options={options.stacks}
-            selectedOptions={profileValues.user.stack}
-            onSelect={handleChange}
-            name="stack"
-            placeholder="Выберите стек"
-          >
-            Стек технологий
-          </FormFieldMultiDropdown>
-        </div>
+        {!isOrganizer && (
+          <>
+            <h2
+              className={styles.header}
+              style={{ marginBottom: '43px' }}
+            >
+              Компетенции
+            </h2>
+            <div
+              className={styles.form_body}
+              style={{ marginBottom: '70px' }}
+            >
+              <FormFieldDropdown
+                selectedOption={profileValues.user.specialization}
+                onSelect={handleChange}
+                name="specialization"
+                options={options.specializations}
+                placeholder="Выберите специализацию"
+                btnPlaceholder="Добавить свою специализацию..."
+                setModalState={() => {
+                  formCtrl.setModalState(true)
+                  setActionType('specialization')
+                }}
+              >
+                Специализация
+              </FormFieldDropdown>
+
+              <FormFieldMultiDropdown
+                options={options.stacks}
+                selectedOptions={profileValues.user.stack}
+                onSelect={handleChange}
+                name="stack"
+                placeholder="Выберите стек"
+                btnPlaceholder="Добавить свой стек..."
+                setModalState={() => {
+                  formCtrl.setModalState(true)
+                  setActionType('stack')
+                }}
+              >
+                Стек технологий
+              </FormFieldMultiDropdown>
+            </div>
+          </>
+        )}
+
         <Button
           type="submit"
           className={styles.btn}
@@ -115,6 +153,34 @@ const MyProfile = () => {
         </Button>
       </form>
 
+      {/* Модальное окно для добавления стека/специализации */}
+      {formCtrl.modalState && (
+        <Modal
+          title={actionType === 'stack' ? 'Добавить свой стек' : 'Добавить специализацию'}
+          id="addItemModal"
+          onClose={() => formCtrl.setModalState(false)}
+        >
+          <CreateItemContext.Provider
+            value={{
+              values: formCtrl.formState,
+              onChange: formCtrl.handleChange,
+            }}
+          >
+            <form
+              onSubmit={formCtrl.handleSubmit}
+              className={styles.modalForm}
+            >
+              <CreateItemForm actionType={actionType} />
+              <Button
+                type="submit"
+                className={styles.btn}
+              >
+                Добавить
+              </Button>
+            </form>
+          </CreateItemContext.Provider>
+        </Modal>
+      )}
     </div>
   )
 }

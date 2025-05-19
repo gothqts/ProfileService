@@ -15,6 +15,8 @@ interface IDropdownProps<T extends string | number> {
   inputStyle?: CSSProperties,
   className?: string,
   placeholder?: string
+  btnPlaceholder?: string
+  setModalState?: () => void
 }
 
 const Dropdown = <T extends string | number>(props: IDropdownProps<T>) => {
@@ -30,7 +32,6 @@ const Dropdown = <T extends string | number>(props: IDropdownProps<T>) => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
   }
-
   return (
     <div
       className={styles.wrapper}
@@ -65,6 +66,13 @@ const Dropdown = <T extends string | number>(props: IDropdownProps<T>) => {
                 <span>{option.name}</span>
               </div>
             ))}
+            {props.btnPlaceholder && (<button
+              onClick={props.setModalState}
+              className={cn(styles.menuOption, styles.btn)}
+            >
+              {props.btnPlaceholder}
+            </button>)}
+
           </div>
         )}
       </div>
