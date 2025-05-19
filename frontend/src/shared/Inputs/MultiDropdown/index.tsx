@@ -14,7 +14,9 @@ interface IMultiDropdownProps<T extends string | number> {
   style?: CSSProperties,
   inputStyle?: CSSProperties,
   className?: string,
-  placeholder?: string
+  placeholder?: string,
+  setModalState?: () => void,
+  btnPlaceholder?: string,
 }
 
 const MultiDropdown = <T extends string | number>({ selectedOptions, ...props }: IMultiDropdownProps<T>) => {
@@ -48,7 +50,10 @@ const MultiDropdown = <T extends string | number>({ selectedOptions, ...props }:
   }
 
   return (
-    <div className={styles.wrapper} ref={ref}>
+    <div
+      className={styles.wrapper}
+      ref={ref}
+    >
       <div
         data-open={isOpen}
         className={cn('text-input', props.className)}
@@ -85,6 +90,10 @@ const MultiDropdown = <T extends string | number>({ selectedOptions, ...props }:
                 <span>{option.name}</span>
               </div>
             ))}
+            {props.btnPlaceholder && (<button onClick={props.setModalState} className={cn(styles.menuOption, styles.btn)}>
+              {props.btnPlaceholder}
+            </button>)}
+
           </div>
         )}
       </div>

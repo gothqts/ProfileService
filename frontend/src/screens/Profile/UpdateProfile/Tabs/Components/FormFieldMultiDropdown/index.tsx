@@ -13,6 +13,8 @@ interface IFormFieldMultiDropdownProps<T extends string | number> extends PropsW
   inputStyle?: CSSProperties,
   className?: string,
   placeholder?: string
+  btnPlaceholder?: string
+  setModalState?: () => void,
 }
 
 const FormFieldDropdown = <T extends string | number>(props: IFormFieldMultiDropdownProps<T>) => {
@@ -26,6 +28,8 @@ const FormFieldDropdown = <T extends string | number>(props: IFormFieldMultiDrop
         name={props.name}
         selectedOptions={props.selectedOptions}
         options={props.options}
+        btnPlaceholder={props.btnPlaceholder}
+        setModalState={props.setModalState}
       />
     </div>
   )

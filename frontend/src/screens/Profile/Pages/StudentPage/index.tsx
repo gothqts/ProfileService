@@ -29,7 +29,6 @@ const Student = (props: IProps) => {
           topic: project.topic,
           date: `${project.startTime} - ${project.endTime}`,
           curatorName: project.curatorName
-
         }));
         setRows(formattedData);
       }

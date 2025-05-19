@@ -4,6 +4,7 @@ import { PropsWithChildren, useContext } from 'react'
 import AuthContext from 'screens/Auth/auth.context.ts'
 import cn from 'utils/cn.ts'
 import styles from 'screens/Auth/auth.module.css'
+
 interface IProps {
   actionType: 'register' | 'login',
   serverError?: string,
@@ -14,7 +15,10 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
   const context = useContext(AuthContext)
   return (
     <>
-      <div className={cn('text--orange', 'text-500', 'text--heading2')} style={{paddingBottom: '70px'}}>{props.actionType === 'register' ? 'Регистрация' : 'Вход'}</div>
+      <div
+        className={cn('text--orange', 'text-500', 'text--heading2')}
+        style={{ paddingBottom: '70px' }}
+      >{props.actionType === 'register' ? 'Регистрация' : 'Вход'}</div>
       <div className={cn(styles.form, styles.fields)}>
         {props.actionType === 'register' && (
           <>
@@ -38,8 +42,18 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
             />
             <TextInput
               className="credentialsForm_input"
+              onChange={context.onChange}
+              value={context.values.patronymic}
+              placeholder="Отчество"
+              name="patronymic"
+              type="text"
+              autoComplete="off"
+            />
+            <TextInput
+              className="credentialsForm_input"
               placeholder="Номер телефона"
               name="phone"
+              maxLength={12}
               value={context.values.phone}
               onChange={context.onChange}
               autoComplete="off"

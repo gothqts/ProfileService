@@ -1,0 +1,17 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 59px;
+}
+.btn{
+    margin-top: 40px;
+    align-self: center;
+}
+.span{
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.5);
+    padding-bottom: 17px;
+}

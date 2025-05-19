@@ -10,11 +10,16 @@ interface IFormFieldDropdownProps<T extends string | number> extends PropsWithCh
   options: IOption<T>[],
   style?: React.CSSProperties,
   placeholder?: string
+  btnPlaceholder?: string
+  setModalState?: () => void,
 }
 
 const FormFieldDropdown = <T extends string | number>(props: IFormFieldDropdownProps<T>) => {
   return (
-    <div className={styles.formField} style={props.style}>
+    <div
+      className={styles.formField}
+      style={props.style}
+    >
       <label className={styles.label}>{props.children}</label>
       <Dropdown
         placeholder={props.placeholder}
@@ -23,6 +28,8 @@ const FormFieldDropdown = <T extends string | number>(props: IFormFieldDropdownP
         name={props.name}
         selectedOption={props.selectedOption}
         options={props.options}
+        btnPlaceholder={props.btnPlaceholder}
+        setModalState={props.setModalState}
       />
     </div>
   )

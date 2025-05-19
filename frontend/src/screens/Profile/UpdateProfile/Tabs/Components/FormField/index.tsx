@@ -7,6 +7,7 @@ interface IProps {
   onChange: (value: string, name: string) => void
   name: string,
   value: string
+  type?: string
 }
 
 const FormField = (props: PropsWithChildren<IProps>) => {
@@ -14,6 +15,7 @@ const FormField = (props: PropsWithChildren<IProps>) => {
     <div className={styles.formField}>
       <label className={styles.label}>{props.children}</label>
       <TextInput
+        type={props.type}
         className="formField_input"
         name={props.name}
         onChange={props.onChange}
