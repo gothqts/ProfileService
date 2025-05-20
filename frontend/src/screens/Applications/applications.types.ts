@@ -1,7 +1,6 @@
 export interface IApplication {
-  id: number,
-  event: string,
-  project: string,
-  specialization: string,
+  eventName: string,
+  projectName: string,
+  specializationName: string,
   status: string,
 }
