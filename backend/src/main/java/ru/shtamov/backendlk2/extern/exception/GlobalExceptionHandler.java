@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -18,6 +19,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponseDto> handleIllegalArgumentException(IllegalArgumentException e){
         return generateResponse(HttpStatus.BAD_REQUEST, "Некорректный запрос", e.getMessage());
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ErrorResponseDto> handleNoSuchElementException(NoSuchElementException e){
+        return generateResponse(HttpStatus.BAD_REQUEST, "Ошибка аутентификации", e.getMessage());
     }
 
     @ExceptionHandler(AccessDeniedException.class)

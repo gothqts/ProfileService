@@ -171,6 +171,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserDto'
 
+    delete:
+      tags:
+        - Users
+      summary: Удаление аккаунта пользователя
+      description: Удаление текущего аутентифицированного пользователя
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Аккаунт пользователя успешно удален
+
   /users/auth:
     post:
       tags:
@@ -208,6 +219,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UtilsDto'
+
+  /users/password:
+    patch:
+      tags:
+        - Users
+      summary: Изменение пароля пользователя
+      description: Изменение пароля текущего аутентифицированного пользователя
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordDto'
+      responses:
+        '200':
+          description: Пароль успешно изменен
 
   /specializations:
     get:
@@ -518,6 +547,17 @@ components:
           type: array
           items:
             type: string
+
+    ChangePasswordDto:
+      type: object
+      required:
+        - oldPassword
+        - newPassword
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
 
   securitySchemes:
     bearerAuth:

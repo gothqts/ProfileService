@@ -4,5 +4,6 @@ public enum UserRole {
     ORGANIZER,
     LEADER,
     CURATOR,
-    STUDENT
+    STUDENT,
+    REMOVED
 }

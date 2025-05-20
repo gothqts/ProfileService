@@ -10,11 +10,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.shtamov.backendlk2.config.jwt.JwtTokenManager;
-import ru.shtamov.backendlk2.domain.Profile;
-import ru.shtamov.backendlk2.domain.User;
+import ru.shtamov.backendlk2.domain.*;
 import ru.shtamov.backendlk2.domain.enums.UserRole;
-import ru.shtamov.backendlk2.extern.repository.ProfileRepository;
-import ru.shtamov.backendlk2.extern.repository.UserRepository;
+import ru.shtamov.backendlk2.extern.exception.CustomAccessDeniedHandler;
+import ru.shtamov.backendlk2.extern.repository.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,12 +28,19 @@ public class UserService {
     private final JwtTokenManager jwtTokenManager;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, ProfileRepository profileRepository, @Lazy AuthenticationManager authenticationManager, @Lazy JwtTokenManager jwtTokenManager, @Lazy PasswordEncoder passwordEncoder) {
+    private final RequestRepository requestRepository;
+    private final DirectionRepository directionRepository;
+    private final EventRepository eventRepository;
+
+    public UserService(UserRepository userRepository, ProfileRepository profileRepository, @Lazy AuthenticationManager authenticationManager, @Lazy JwtTokenManager jwtTokenManager, @Lazy PasswordEncoder passwordEncoder, RequestRepository requestRepository, DirectionRepository directionRepository, EventRepository eventRepository) {
         this.userRepository = userRepository;
         this.profileRepository = profileRepository;
         this.authenticationManager = authenticationManager;
         this.jwtTokenManager = jwtTokenManager;
         this.passwordEncoder = passwordEncoder;
+        this.requestRepository = requestRepository;
+        this.directionRepository = directionRepository;
+        this.eventRepository = eventRepository;
     }
 
     public User findByEmail(String email) {
@@ -47,6 +53,10 @@ public class UserService {
                 getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
             throw new NoSuchElementException("Ошибка аутентификации");
+        }
+        if(authentication.getAuthorities().stream()
+                .anyMatch(auth -> "REMOVED".equals(auth.getAuthority()))){
+            throw new NoSuchElementException("Пользователь с такими данными не существует");
         }
 
         User currentUser = (User) authentication.getPrincipal();
@@ -108,7 +118,35 @@ public class UserService {
                 )
         );
 
+        if(authentication.getAuthorities().stream()
+                .anyMatch(auth -> "REMOVED".equals(auth.getAuthority()))){
+            throw new NoSuchElementException("Пользователь с такими данными не существует");
+        }
+
         return jwtTokenManager.generateToken(email, authentication.getAuthorities());
     }
 
+    public void changePassword(String oldPassword, String newPassword){
+        User user = getAuthenticatedUser();
+
+        if (!user.getPassword().equals(oldPassword))
+            throw new IllegalArgumentException("Текущий пароль введен неправильно");
+
+        if (newPassword == null)
+            throw new IllegalArgumentException("Новый пароль не может быть пустым");
+
+        user.setPassword(newPassword);
+        userRepository.save(user);
+
+        log.info("Пароль для пользователя {} изменен с {} на {}", user.getEmail(), oldPassword, newPassword);
+    }
+
+    public void deleteAccount(){
+        User user = getAuthenticatedUser();
+
+        user.setRole(UserRole.REMOVED);
+        userRepository.save(user);
+
+        log.info("Пользователь {} Удален", user.getEmail());
+    }
 }

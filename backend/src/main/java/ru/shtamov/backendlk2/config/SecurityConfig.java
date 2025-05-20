@@ -72,6 +72,8 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/users").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/users/my").authenticated()
                                 .requestMatchers(HttpMethod.PUT, "/users").authenticated()
+                                .requestMatchers(HttpMethod.PATCH, "/users/password").authenticated()
+                                .requestMatchers(HttpMethod.DELETE, "/users").authenticated()
                 )
                 .exceptionHandling(exception ->
                         exception

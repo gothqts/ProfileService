@@ -88,6 +88,12 @@ public class UserController {
                 .body(utilsDto);
     }
 
+    @PatchMapping("/password")
+    public ResponseEntity<?> changePass(@RequestBody ChangePasswordDto changePasswordDto){
+        userService.changePassword(changePasswordDto.oldPassword(), changePasswordDto.newPassword());
+        return ResponseEntity.ok().build();
+    }
+
     @PutMapping
     public ResponseEntity<?> update(@RequestBody UpdateUserDto userDto){
         Profile updatedProfile = userService.updateUser(userDtoConverter.toProfile(userDto));
@@ -96,6 +102,13 @@ public class UserController {
 
         return ResponseEntity.ok().body(userDtoConverter.toUserDto(currentUser, updatedProfile));
     }
+
+    @DeleteMapping
+    public ResponseEntity<?> delete(){
+        userService.deleteAccount();
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 }

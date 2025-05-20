@@ -26,6 +26,8 @@ public class EventDirectionRunner {
     private final TeamRepository tr;
     private final MeetingRepository mr;
 
+    private final RequestRunner requestRunner;
+
     @Transactional
     public void run(){
         log.info("EventRepository начал свою работу");
@@ -300,7 +302,7 @@ public class EventDirectionRunner {
             team6.setProject(auditTool);
             tr.save(team6);
 
-
+            requestRunner.run();
 
         }
     }
