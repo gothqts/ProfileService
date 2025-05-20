@@ -1,7 +1,6 @@
 export interface IMeeting {
-  id: number;
   date: string;
-  theme: string;
+  topic: string;
   place: string;
   team: string;
 }

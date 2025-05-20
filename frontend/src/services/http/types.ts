@@ -13,6 +13,7 @@ export interface IErrorResponse {
   status: 'error'
   message: string
   code: number | undefined
+  body?: Record<string, string>
 }
 
 export type HTTPResponse<T = undefined> =

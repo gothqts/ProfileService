@@ -8,10 +8,11 @@ import Button from 'shared/Buttons'
 import Footer from 'shared/Layout/components/Footer'
 import LogoBlock from 'shared/Layout/components/Header/LogoBlock'
 import cn from 'utils/cn.ts'
+import ValidationForm from 'shared/Validation'
 
 const Auth = () => {
 
-  const [authType, setAuthType] = useState(AuthTypeEnum.register)
+  const [authType, setAuthType] = useState(AuthTypeEnum.login)
   const authCtrl = useAuthCtrl({
     actionType: authType,
     setAuthType: () => setAuthType(AuthTypeEnum.login),
@@ -20,6 +21,27 @@ const Auth = () => {
     authType === AuthTypeEnum.register
       ? setAuthType(AuthTypeEnum.login)
       : setAuthType(AuthTypeEnum.register)
+  }
+  const renderContent = () => {
+    return (
+      <CredentialsForm
+        actionType={authType}
+        serverError={authCtrl.serverError}
+      >
+        <div className={authType === AuthTypeEnum.login ? styles.login_bottom : styles.register_bottom}>
+          <Button type="submit">
+            {authType === AuthTypeEnum.register ? 'Зарегестрироваться' : 'Войти'}
+          </Button>
+          <span
+            onClick={changeType}
+            className="text--orange"
+            style={{ cursor: 'pointer', fontSize: '20px' }}
+          >
+                {authType === 'register' ? 'Есть аккаунт?' : 'Нет аккаунта?'}
+          </span>
+        </div>
+      </CredentialsForm>
+    )
   }
   return (
     <div className={styles.container}>
@@ -30,27 +52,13 @@ const Auth = () => {
       <AuthContext.Provider
         value={{ values: authCtrl.authValues, onChange: authCtrl.handleChange }}
       >
-
-        <form
+        <ValidationForm
+          errors={authCtrl.validationCtrl.errors}
+          onSubmit={authCtrl.validationCtrl.handleSubmit}
           className={cn('flex-form', styles.content)}
-          onSubmit={authCtrl.handleSubmitCredentials}
         >
-          <CredentialsForm actionType={authType}>
-            <div className={authType === AuthTypeEnum.login ? styles.login_bottom : styles.register_bottom}>
-              <Button type="submit">
-                {authType === AuthTypeEnum.register ? 'Зарегестрироваться' : 'Войти'}
-              </Button>
-              <span
-                onClick={changeType}
-                className="text--orange"
-                style={{ cursor: 'pointer', fontSize: '20px' }}
-              >
-                {authType === 'register' ? 'Есть аккаунт?' : 'Нет аккаунта?'}
-                </span>
-            </div>
-          </CredentialsForm>
-        </form>
-
+          {renderContent()}
+        </ValidationForm>
       </AuthContext.Provider>
       <Footer />
     </div>

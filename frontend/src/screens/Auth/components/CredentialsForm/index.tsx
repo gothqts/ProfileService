@@ -4,11 +4,11 @@ import { PropsWithChildren, useContext } from 'react'
 import AuthContext from 'screens/Auth/auth.context.ts'
 import cn from 'utils/cn.ts'
 import styles from 'screens/Auth/auth.module.css'
+import { AuthTypeEnum } from 'enums/authEnum.ts'
 
 interface IProps {
-  actionType: 'register' | 'login',
-  serverError?: string,
-  changeType?: () => void,
+  serverError: string
+  actionType: 'register' | 'login'
 }
 
 const CredentialsForm = (props: PropsWithChildren<IProps>) => {
@@ -18,11 +18,13 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
       <div
         className={cn('text--orange', 'text-500', 'text--heading2')}
         style={{ paddingBottom: '70px' }}
-      >{props.actionType === 'register' ? 'Регистрация' : 'Вход'}</div>
+      >
+        {props.actionType === AuthTypeEnum.register ? 'Регистрация' : 'Вход'}</div>
       <div className={cn(styles.form, styles.fields)}>
-        {props.actionType === 'register' && (
+        {props.actionType === AuthTypeEnum.register && (
           <>
             <TextInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               placeholder="Имя"
               name="firstName"
@@ -32,6 +34,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <TextInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               placeholder="Фамилия"
               name="lastName"
@@ -41,6 +44,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <TextInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               onChange={context.onChange}
               value={context.values.patronymic}
@@ -50,6 +54,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <TextInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               placeholder="Номер телефона"
               name="phone"
@@ -59,15 +64,16 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <TextInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               placeholder="Почта"
               name="email"
               value={context.values.email}
               onChange={context.onChange}
-              type="email"
               autoComplete="off"
             />
             <PasswordInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               placeholder="Пароль"
               name="password"
@@ -76,6 +82,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               autoComplete="off"
             />
             <PasswordInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               placeholder="Повторный пароль"
               name="repeatPassword"
@@ -83,21 +90,22 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               onChange={context.onChange}
               autoComplete="off"
             />
-            {props.serverError}
+            {props.serverError && <span>{props.serverError}</span>}
           </>
         )}
         {props.actionType === 'login' && (
           <>
             <TextInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               placeholder="Почта"
               name="email"
               value={context.values.email}
               onChange={context.onChange}
-              type="email"
               autoComplete="off"
             />
             <PasswordInput
+              serverError={props.serverError}
               className="credentialsForm_input"
               placeholder="Пароль"
               name="password"
@@ -105,7 +113,7 @@ const CredentialsForm = (props: PropsWithChildren<IProps>) => {
               onChange={context.onChange}
               autoComplete="off"
             />
-            {props.serverError}
+            {props.serverError && <span>{props.serverError}</span>}
           </>
 
         )}
