@@ -23,6 +23,8 @@ tags:
     description: Управление специализациями
   - name: Stacks
     description: Управление технологическими стеками
+  - name: Filters
+    description: Фильтры для проектов
 
 paths:
   /directions:
@@ -83,10 +85,23 @@ paths:
     get:
       tags:
         - Projects
-      summary: Получение всех проектов
-      description: Возвращает список всех проектов с основной информацией
+      summary: Получение всех проектов с возможностью фильтрации
+      description: Возвращает список всех проектов с основной информацией, с возможностью фильтрации по мероприятию и направлению
       security:
         - bearerAuth: []
+      parameters:
+        - name: even_filter
+          in: query
+          description: Фильтр по названию мероприятия
+          required: false
+          schema:
+            type: string
+        - name: direction_filter
+          in: query
+          description: Фильтр по названию направления
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Список проектов успешно получен
@@ -96,6 +111,22 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProjectMainDto'
+
+  /filter:
+    get:
+      tags:
+        - Filters
+      summary: Получение фильтров для проектов
+      description: Возвращает список мероприятий и направлений для фильтрации проектов
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Список фильтров успешно получен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectFiltersDto'
 
   /requests:
     get:
@@ -558,6 +589,27 @@ components:
           type: string
         newPassword:
           type: string
+
+    FilterDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+
+    ProjectFiltersDto:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterDto'
+        directions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterDto'
 
   securitySchemes:
     bearerAuth:

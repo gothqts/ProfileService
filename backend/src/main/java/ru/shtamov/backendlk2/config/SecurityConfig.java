@@ -74,6 +74,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/users").authenticated()
                                 .requestMatchers(HttpMethod.PATCH, "/users/password").authenticated()
                                 .requestMatchers(HttpMethod.DELETE, "/users").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/filter").authenticated()
                 )
                 .exceptionHandling(exception ->
                         exception
@@ -109,7 +110,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:5173"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "PATCH", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
 

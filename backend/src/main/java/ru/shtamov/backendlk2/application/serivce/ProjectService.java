@@ -17,8 +17,19 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
 
 
-    public List<Project> getAll(){
+    public List<Project> getAll(String eventName, String directionName){
         List<Project> projects = projectRepository.findAll();
+
+        if (eventName != null)
+            projects = projects.stream()
+                    .filter(p -> p.getDirection().getEvent().getName().equals(eventName))
+                    .toList();
+
+        if (directionName != null)
+            projects = projects.stream()
+                    .filter(p -> p.getDirection().getName().equals(directionName))
+                    .toList();
+
 
         log.info("ProjectService: Получил список всех проектов для общей страницы");
         return projects;

@@ -39,10 +39,10 @@ public class StackAndSpecializationRunner {
 
         List<Specialization> specializations = List.of(
                 new Specialization(null, "Java-разработчик", CompetenceStatus.CONFIRMED),
-                new Specialization(null, "Frontend разработчик", CompetenceStatus.CONFIRMED),
+                new Specialization(null, "Frontend-разработчик", CompetenceStatus.CONFIRMED),
                 new Specialization(null, "UX/UI-дизайнер", CompetenceStatus.CONFIRMED),
                 new Specialization(null, "Аналитик UX", CompetenceStatus.CONFIRMED),
-                new Specialization(null, "С# разработчик", CompetenceStatus.CONFIRMED),
+                new Specialization(null, "С#-разработчик", CompetenceStatus.CONFIRMED),
                 new Specialization(null, "Project manager", CompetenceStatus.CONFIRMED)
                 );
         specializationRepository.saveAll(specializations);
