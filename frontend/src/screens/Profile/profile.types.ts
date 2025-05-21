@@ -78,3 +78,7 @@ export interface ICourse {
   name: string,
   value: string,
 }
+export interface IPasswords{
+  oldPassword: string,
+  newPassword: string,
+}
