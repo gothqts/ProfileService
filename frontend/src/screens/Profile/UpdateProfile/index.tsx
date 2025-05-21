@@ -34,7 +34,7 @@ const UpdateProfile = () => {
   }, [])
 
   const renderContent = () => {
-    if (!userData.user.name) return null
+    if (!userData.auth.accessToken) return null
 
     switch (tab) {
       case 'myProfile':
@@ -73,6 +73,7 @@ const UpdateProfile = () => {
           Сменить пароль
         </div>
         <Button
+
           type="button"
           className={styles.btn}
         >Удалить аккаунт</Button>

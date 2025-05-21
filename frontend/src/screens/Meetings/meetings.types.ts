@@ -1,6 +1,6 @@
 export interface IMeeting {
   date: string;
   topic: string;
-  place: string;
-  team: string;
+  link: string;
+  teamName: string;
 }

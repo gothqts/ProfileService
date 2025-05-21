@@ -26,25 +26,25 @@ const firstNameValidate = (firstName: string): IValidationFunctionResponse | nul
 
 const phoneValidate = (phone: string): IValidationFunctionResponse | null => {
   if (!phone) {
-    return { key: 'phone', message: 'Введите телефон' };
+    return { key: 'phone', message: 'Введите телефон' }
   }
 
   if (!/^[\d\+]+$/.test(phone)) {
     return {
       key: 'phone',
-      message: 'Номер должен содержать только цифры и знак +'
-    };
+      message: 'Номер должен содержать только цифры и знак +',
+    }
   }
 
   if (phone.includes('+') && !phone.startsWith('+')) {
     return {
       key: 'phone',
-      message: 'Некорректный формат'
-    };
+      message: 'Некорректный формат',
+    }
   }
 
-  return null;
-};
+  return null
+}
 
 
 const lastNameValidate = (lastName: string): IValidationFunctionResponse | null => {
@@ -70,7 +70,35 @@ const repeatPasswordValidate = (repeatPassword: string, password?: string): IVal
   }
   return null
 }
+const telegramValidate = (telegram: string): IValidationFunctionResponse | null => {
+  if (!telegram) {
+    return { key: 'telegram', message: 'Введите ваш Telegram' }
+  }
 
+  if (!/^@[a-zA-Z0-9_]{4,31}$/.test(telegram)) {
+    return {
+      key: 'telegram',
+      message: 'telegram должен быть в формате @username',
+    }
+  }
+
+  return null
+}
+
+const vkValidate = (vk: string): IValidationFunctionResponse | null => {
+  if (!vk) {
+    return { key: 'vk', message: 'Введите ваш VK ID' }
+  }
+
+  if (!/^\/[a-zA-Z0-9_.]{1,31}$/.test(vk)) {
+    return {
+      key: 'vk',
+      message: 'VK ID должен быть в формате /username',
+    }
+  }
+
+  return null
+}
 const validation = {
   emailValidate,
   passwordValidate,
@@ -79,6 +107,8 @@ const validation = {
   patronymicValidate,
   repeatPasswordValidate,
   phoneValidate,
+  telegramValidate,
+  vkValidate,
 }
 
 export default validation

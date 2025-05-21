@@ -3,7 +3,9 @@ import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import profileApi from 'screens/Profile/profile.api.ts'
 import { ICourse } from 'screens/Profile/profile.types.ts'
-import { IAuthState } from 'screens/Auth/auth.types.ts'
+import validation from 'shared/Validation/validation.ts'
+import useValidationCtrl from 'shared/Validation/useValidationCtrl.ts'
+import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError.ts'
 
 interface IOption {
   name: string
@@ -16,14 +18,9 @@ interface IOptions {
   specializations: IOption[]
 }
 
-interface IProfileFormCtrl {
-  handleChange: (value: string, name: string) => void
-  profileValues: IAuthState
-  options: IOptions,
-  handleSubmitCredentials: (e: React.FormEvent) => void
-}
 
-const useProfileFormCtrl = (): IProfileFormCtrl => {
+const useProfileFormCtrl = () => {
+  const { wait, loading, serverError } = useHttpLoaderWithServerError()
   const [options, setOptions] = useState<IOptions>({
     course: [
       { name: '1 курс', value: '1' },
@@ -36,7 +33,7 @@ const useProfileFormCtrl = (): IProfileFormCtrl => {
   })
 
   const [profileValues, setProfileValues] = useAtom(authAtom)
-
+  const { id, userRole, token, ...userData } = profileValues.user
 
   const transformToOptions = (items: { name: string }[]): IOption[] => {
     return items.map(item => ({
@@ -46,7 +43,7 @@ const useProfileFormCtrl = (): IProfileFormCtrl => {
   }
 
   useEffect(() => {
-    profileApi.getStacks().then((resp) => {
+    wait(profileApi.getStacks(), (resp) => {
       if (resp.status === 'success') {
         setOptions(prev => ({
           ...prev,
@@ -54,9 +51,7 @@ const useProfileFormCtrl = (): IProfileFormCtrl => {
         }))
       }
     })
-
-
-    profileApi.getSpecializations().then((resp) => {
+    wait(profileApi.getSpecializations(), (resp) => {
       if (resp.status === 'success') {
         setOptions(prev => ({
           ...prev,
@@ -64,6 +59,7 @@ const useProfileFormCtrl = (): IProfileFormCtrl => {
         }))
       }
     })
+
   }, [])
 
   const handleChange = (value: string, name: string) => {
@@ -75,11 +71,8 @@ const useProfileFormCtrl = (): IProfileFormCtrl => {
       },
     }))
   }
-  const handleSubmitCredentials = (e: React.FormEvent) => {
-    e.preventDefault()
-    const { id, userRole, token, ...userData } = profileValues.user
-
-    profileApi.putUserInfo(userData).then((resp) => {
+  const handleSubmitCredentials = () => {
+    wait(profileApi.putUserInfo(userData), (resp) => {
       if (resp.status === 'success') {
         alert('Данные успешно обновлены')
       }
@@ -87,11 +80,24 @@ const useProfileFormCtrl = (): IProfileFormCtrl => {
 
   }
 
+  const validateProfile = {
+    email: validation.emailValidate,
+    name: validation.firstNameValidate,
+    surname: validation.lastNameValidate,
+    patronymic: validation.patronymicValidate,
+  }
+
+
+  const validationCtrl = useValidationCtrl(handleSubmitCredentials, userData, validateProfile)
+
   return {
     handleChange,
     profileValues,
     options,
     handleSubmitCredentials,
+    serverError,
+    loading,
+    validationCtrl,
   }
 }
 

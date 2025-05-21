@@ -9,150 +9,149 @@ import Modal from 'shared/Modal'
 import CreateItemForm from 'screens/Profile/UpdateProfile/Tabs/MyProfile/Components/CreateItemForm'
 import CreateItemContext from 'screens/Profile/UpdateProfile/Tabs/MyProfile/myProfileContext.tsx'
 import useCreateItemCtrl from 'screens/Profile/UpdateProfile/Tabs/MyProfile/hooks/useCreateItemCtrl.tsx'
+import ValidationForm from 'shared/Validation'
 
 const MyProfile = () => {
-  const {
-    handleChange,
-    profileValues,
-    options,
-    handleSubmitCredentials,
-  } = useProfileFormCtrl()
+  const profileFormCtrl = useProfileFormCtrl()
 
-  const isOrganizer = profileValues.auth?.role === 'ORGANIZER'
+  const isOrganizer = profileFormCtrl.profileValues.auth?.role === 'ORGANIZER'
   const [actionType, setActionType] = useState<'stack' | 'specialization'>('stack')
   const formCtrl = useCreateItemCtrl({ actionType })
 
   return (
     <div className={styles.container}>
       {/* Основная форма профиля */}
-      <form
-        className={styles.form}
-        onSubmit={handleSubmitCredentials}
+      <ValidationForm
+        errors={profileFormCtrl.validationCtrl.errors}
+        onSubmit={profileFormCtrl.validationCtrl.handleSubmit}
       >
-        <h2
-          className={styles.header}
-          style={{ marginBottom: '43px' }}
-        >
-          Личная информация
-        </h2>
-
         <div
-          className={styles.form_body}
-          style={{ marginBottom: '70px' }}
+          className={styles.form}
         >
-          <FormField
-            name="surname"
-            placeholder="Фамилия"
-            value={profileValues.user.surname}
-            onChange={handleChange}
+          <h2
+            className={styles.header}
+            style={{ marginBottom: '43px' }}
           >
-            Фамилия
-          </FormField>
+            Личная информация
+          </h2>
 
-          <FormField
-            name="name"
-            placeholder="Имя"
-            value={profileValues.user.name}
-            onChange={handleChange}
+          <div
+            className={styles.form_body}
+            style={{ marginBottom: '70px' }}
           >
-            Имя
-          </FormField>
+            <FormField
+              name="surname"
+              placeholder="Фамилия"
+              value={profileFormCtrl.profileValues.user.surname}
+              onChange={profileFormCtrl.handleChange}
+            >
+              Фамилия
+            </FormField>
 
-          <FormField
-            name="patronymic"
-            placeholder="Отчество"
-            value={profileValues.user.patronymic}
-            onChange={handleChange}
-          >
-            Отчество
-          </FormField>
+            <FormField
+              name="name"
+              placeholder="Имя"
+              value={profileFormCtrl.profileValues.user.name}
+              onChange={profileFormCtrl.handleChange}
+            >
+              Имя
+            </FormField>
 
-          <FormField
-            name="university"
-            placeholder="Учебное заведение"
-            value={profileValues.user.university}
-            onChange={handleChange}
-          >
-            Учебное заведение
-          </FormField>
+            <FormField
+              name="patronymic"
+              placeholder="Отчество"
+              value={profileFormCtrl.profileValues.user.patronymic}
+              onChange={profileFormCtrl.handleChange}
+            >
+              Отчество
+            </FormField>
+
+            <FormField
+              name="university"
+              placeholder="Учебное заведение"
+              value={profileFormCtrl.profileValues.user.university}
+              onChange={profileFormCtrl.handleChange}
+            >
+              Учебное заведение
+            </FormField>
+
+            {!isOrganizer && (
+              <>
+                <FormField
+                  name="speciality"
+                  placeholder="Специальность"
+                  value={profileFormCtrl.profileValues.user.speciality}
+                  onChange={profileFormCtrl.handleChange}
+                >
+                  Специальность
+                </FormField>
+
+                <FormFieldDropdown
+                  selectedOption={profileFormCtrl.profileValues.user.course ? `${profileFormCtrl.profileValues.user.course} курс` : ''}
+                  onSelect={profileFormCtrl.handleChange}
+                  name="course"
+                  options={profileFormCtrl.options.course}
+                  placeholder="Курс"
+                >
+                  Курс
+                </FormFieldDropdown>
+              </>
+            )}
+          </div>
 
           {!isOrganizer && (
             <>
-              <FormField
-                name="speciality"
-                placeholder="Специальность"
-                value={profileValues.user.speciality}
-                onChange={handleChange}
+              <h2
+                className={styles.header}
+                style={{ marginBottom: '43px' }}
               >
-                Специальность
-              </FormField>
+                Компетенции
+              </h2>
+              <div
+                className={styles.form_body}
+                style={{ marginBottom: '70px' }}
+              >
+                <FormFieldDropdown
+                  selectedOption={profileFormCtrl.profileValues.user.specialization}
+                  onSelect={profileFormCtrl.handleChange}
+                  name="specialization"
+                  options={profileFormCtrl.options.specializations}
+                  placeholder="Выберите специализацию"
+                  btnPlaceholder="Добавить свою специализацию..."
+                  setModalState={() => {
+                    formCtrl.setModalState(true)
+                    setActionType('specialization')
+                  }}
+                >
+                  Специализация
+                </FormFieldDropdown>
 
-              <FormFieldDropdown
-                selectedOption={profileValues.user.course ? `${profileValues.user.course} курс` : ''}
-                onSelect={handleChange}
-                name="course"
-                options={options.course}
-                placeholder="Курс"
-              >
-                Курс
-              </FormFieldDropdown>
+                <FormFieldMultiDropdown
+                  options={profileFormCtrl.options.stacks}
+                  selectedOptions={profileFormCtrl.profileValues.user.stack}
+                  onSelect={profileFormCtrl.handleChange}
+                  name="stack"
+                  placeholder="Выберите стек"
+                  btnPlaceholder="Добавить свой стек..."
+                  setModalState={() => {
+                    formCtrl.setModalState(true)
+                    setActionType('stack')
+                  }}
+                >
+                  Стек технологий
+                </FormFieldMultiDropdown>
+              </div>
             </>
           )}
+
+          <Button
+            type="submit"
+            className={styles.btn}
+          >
+            Сохранить изменения
+          </Button>
         </div>
-
-        {!isOrganizer && (
-          <>
-            <h2
-              className={styles.header}
-              style={{ marginBottom: '43px' }}
-            >
-              Компетенции
-            </h2>
-            <div
-              className={styles.form_body}
-              style={{ marginBottom: '70px' }}
-            >
-              <FormFieldDropdown
-                selectedOption={profileValues.user.specialization}
-                onSelect={handleChange}
-                name="specialization"
-                options={options.specializations}
-                placeholder="Выберите специализацию"
-                btnPlaceholder="Добавить свою специализацию..."
-                setModalState={() => {
-                  formCtrl.setModalState(true)
-                  setActionType('specialization')
-                }}
-              >
-                Специализация
-              </FormFieldDropdown>
-
-              <FormFieldMultiDropdown
-                options={options.stacks}
-                selectedOptions={profileValues.user.stack}
-                onSelect={handleChange}
-                name="stack"
-                placeholder="Выберите стек"
-                btnPlaceholder="Добавить свой стек..."
-                setModalState={() => {
-                  formCtrl.setModalState(true)
-                  setActionType('stack')
-                }}
-              >
-                Стек технологий
-              </FormFieldMultiDropdown>
-            </div>
-          </>
-        )}
-
-        <Button
-          type="submit"
-          className={styles.btn}
-        >
-          Сохранить изменения
-        </Button>
-      </form>
-
+      </ValidationForm>
       {/* Модальное окно для добавления стека/специализации */}
       {formCtrl.modalState && (
         <Modal

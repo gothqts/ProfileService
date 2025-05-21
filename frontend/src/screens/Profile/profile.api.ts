@@ -4,7 +4,7 @@ import { IUser } from 'screens/Auth/auth.types.ts'
 import { HTTPResponse } from 'services/http/types.ts'
 import {
   ICuratorProjectsAndTeams,
-  ILeaderProjectsAndDirections, IOrganizerEvents, ISpecialization, IStack,
+  ILeaderProjectsAndDirections, IOrganizerEvents, IPasswords, ISpecialization, IStack,
   IStudentProjectsAndTeams,
 } from 'screens/Profile/profile.types.ts'
 import { IFormState } from 'screens/Profile/UpdateProfile/Tabs/MyProfile/myProfileContext.tsx'
@@ -51,6 +51,12 @@ const postSpecializations = (specialization: Pick<IFormState, 'specialization'>)
   }
   return http.post(config.API_URL + '/specializations', formattedSpecialization).then(handleHttpResponse).catch(handleErrorResponse)
 }
+const patchPassword = (passwords: IPasswords): Promise<HTTPResponse> => {
+  return http.patch(config.API_URL + '/users/password', passwords).then(handleHttpResponse).catch(handleErrorResponse)
+}
+const deleteAccount = (): Promise<HTTPResponse> => {
+  return http.delete(config.API_URL + '/users').then(handleHttpResponse).catch(handleErrorResponse)
+}
 const profileApi = {
   getUserInfo,
   putUserInfo,
@@ -62,5 +68,7 @@ const profileApi = {
   getSpecializations,
   postStack,
   postSpecializations,
+  patchPassword,
+  deleteAccount,
 }
 export default profileApi

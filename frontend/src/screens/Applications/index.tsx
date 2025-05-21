@@ -1,36 +1,23 @@
 import Table from 'shared/Table'
 import styles from './applications.module.css'
+import useFetchApplications from 'screens/Applications/hooks/useFetchApplications.ts'
+import { IApplication } from 'screens/Applications/applications.types.ts'
 
 const Applications = () => {
-    const tableHeaders = {
-
-        event: 'Мероприятие',
-        project: 'Проект',
-        specialization: 'Специализация',
-        status: 'Статус'
-    }
+  const { applications } = useFetchApplications()
+  const tableHeaders: IApplication = {
+    eventName: 'Мероприятие',
+    projectName: 'Проект',
+    specializationName: 'Специализация',
+    status: 'Статус',
+  }
   return (
     <div className={styles.container}>
-        <div className={styles.title}>Мои заявки</div>
+      <div className={styles.title}>Мои заявки</div>
       <Table
-        className='text-body-m'
+        className="text-body-m"
         headers={tableHeaders}
-        data={[{
-          id: 1,
-          event: 'Собрание',
-          project: 'Проектирование интерфейса',
-          specialization: 'Проект',
-          status: 'Закрыто',
-        },
-          {
-            id: 1,
-            event: 'Собрание',
-            project: 'Проектирование интерфейса',
-            specialization: 'Проект',
-            status: 'Закрыто',
-          },
-
-        ]}
+        data={applications}
       />
     </div>
   )

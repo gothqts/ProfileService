@@ -41,8 +41,6 @@ const TextInput = ({
   const error = context.errors[props.name]?.message || props.error
   const isError = Boolean(error || serverError)
 
-  console.log(context.errors)
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value, name)
   }
