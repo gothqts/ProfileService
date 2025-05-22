@@ -1,7 +1,7 @@
-import styles from 'screens/Profile/UpdateProfile/Tabs/MyProfile/myProfile.module.css'
-import FormField from 'screens/Profile/UpdateProfile/Tabs/Components/FormField'
+import styles from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfile.module.css'
+import FormField from 'screens/Profile/UpdateProfile/components/Tabs/Components/FormField'
 import Button from 'shared/Buttons'
-import usePasswordCtrl from 'screens/Profile/UpdateProfile/Tabs/ChangePassword/hooks/usePasswordCtrl.ts'
+import usePasswordCtrl from 'screens/Profile/UpdateProfile/components/Tabs/ChangePassword/hooks/usePasswordCtrl.ts'
 import ValidationForm from 'shared/Validation'
 
 const ChangePassword = () => {

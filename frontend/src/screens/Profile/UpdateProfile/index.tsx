@@ -1,38 +1,19 @@
 import styles from './updatePage.module.css'
-import MyProfile from 'screens/Profile/UpdateProfile/Tabs/MyProfile'
-import { useAtom } from 'jotai/index'
-import { authAtom } from 'screens/Auth/auth.atom.ts'
-import { useEffect, useState } from 'react'
-import profileApi from 'screens/Profile/profile.api.ts'
+import MyProfile from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile'
+import { useState } from 'react'
 import cn from 'utils/cn.ts'
-import Contacts from 'screens/Profile/UpdateProfile/Tabs/Contacts'
-import ChangePassword from 'screens/Profile/UpdateProfile/Tabs/ChangePassword'
+import Contacts from 'screens/Profile/UpdateProfile/components/Tabs/Contacts'
+import ChangePassword from 'screens/Profile/UpdateProfile/components/Tabs/ChangePassword'
 import Button from 'shared/Buttons'
-import { IUser } from 'screens/Auth/auth.types.ts'
+import DeleteAccForm from 'screens/Profile/UpdateProfile/components/DeleteAccForm'
+import Modal from 'shared/Modal'
+import useUpdateProfileCtrl from 'screens/Profile/UpdateProfile/hooks/useUpdateProfileCtrl.ts'
 
 const UpdateProfile = () => {
-  const [userData, setUserData] = useAtom(authAtom)
   const [tab, setTab] = useState('myProfile')
+  const [modal, setModal] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (!userData.user.userRole) {
-      profileApi.getUserInfo().then((resp) => {
-        if (resp.status === 'success') {
-          const userData = Object.fromEntries(
-            Object.entries(resp.body).map(([key, value]) => [
-              key,
-              value === null ? '' : value,
-            ]),
-          ) as IUser
-          setUserData(prev => ({
-            ...prev,
-            user: userData,
-          }))
-        }
-      })
-    }
-  }, [])
-
+  const { userData, handleSubmitDelete } = useUpdateProfileCtrl()
   const renderContent = () => {
     if (!userData.auth.accessToken) return null
 
@@ -73,10 +54,21 @@ const UpdateProfile = () => {
           Сменить пароль
         </div>
         <Button
-
+          onClick={() => setModal(true)}
           type="button"
           className={styles.btn}
         >Удалить аккаунт</Button>
+
+        {modal && (
+          <Modal
+            id="deleteAccModal"
+            title="Вы уверены, что хотите удалить аккаунт?"
+            onClose={() => setModal(false)}
+          >
+            <DeleteAccForm onSubmit={handleSubmitDelete} />
+          </Modal>
+        )}
+
       </div>
       <div className={styles.content}>
         {renderContent()}

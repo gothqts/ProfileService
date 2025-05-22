@@ -2,7 +2,7 @@ import { atom } from 'jotai'
 import { IAuthState } from 'screens/Auth/auth.types.ts'
 import { decode } from 'utils/decodeToken.ts'
 
-const generateEmptyState = () => ({
+export const generateEmptyState = () => ({
   auth: {
     accessToken: localStorage.getItem('token') || '',
     expires: Number(decode(localStorage.getItem('token'))?.exp),

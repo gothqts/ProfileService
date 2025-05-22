@@ -1,6 +1,6 @@
 import TextInput from 'shared/Inputs/TextInput'
 import styles from './CreateItemForm.module.css'
-import CreateItemContext from 'screens/Profile/UpdateProfile/Tabs/MyProfile/myProfileContext.tsx'
+import CreateItemContext from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfileContext.tsx'
 import { PropsWithChildren, useContext } from 'react'
 
 interface ICreateItemFormProps {

@@ -17,6 +17,7 @@ interface IDropdownProps<T extends string | number> {
   placeholder?: string
   btnPlaceholder?: string
   setModalState?: () => void
+  arrowStyle?: 'default' | 'orange'
 }
 
 const Dropdown = <T extends string | number>(props: IDropdownProps<T>) => {
@@ -49,7 +50,7 @@ const Dropdown = <T extends string | number>(props: IDropdownProps<T>) => {
         <div className={styles.arrow}>
           <FlippingArrow
             isOpen={isOpen}
-            arrowStyle="orange"
+            arrowStyle={props.arrowStyle ?? "orange"}
           />
         </div>
         {isOpen && (

@@ -26,4 +26,29 @@ const links: ILink[] = [
   },
 ]
 
-export default links
+const organizerLinks: ILink[] = [
+  {
+    path: urls.profile,
+    name: 'Профиль',
+
+  },
+  {
+    path: urls.events,
+    name: 'Мероприятия',
+  },
+  {
+    path: urls.meetings,
+    name: 'Мои собрания',
+  },
+  {
+    path: urls.properties,
+    name: 'ПВК',
+  },
+
+]
+
+const allLinks = {
+  links,
+  organizerLinks,
+}
+export default allLinks

@@ -28,15 +28,16 @@
     color: #6f7786;
 }
 .btn{
-     background: none;;
+    background: none;;
     width: 100%;
     border: none;
 }
 .arrow {
     position: absolute;
     right: 20px;
-    top: 50%;
+    top: 24px;
     transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .list {
@@ -69,6 +70,7 @@
     font-weight: 600;
     font-size: 16px;
     transition: 0.3s;
+
 }
 
 .menuOption[data-active='true'] {
