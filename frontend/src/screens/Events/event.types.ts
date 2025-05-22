@@ -18,4 +18,15 @@ export interface IProject {
   endTime: string;
 }
 
+export interface IFilters {
+  events: {
+    id: number,
+    name: string,
+  }[];
+  directions: {
+    id: number,
+    name: string,
+  }[]
+}
+
 export type ProjectWithoutTimestamps = Omit<IProject, 'startTime' | 'endTime'>;

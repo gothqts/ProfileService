@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { generateEmptyFormState } from 'screens/Profile/UpdateProfile/Tabs/MyProfile/myProfileContext.tsx'
+import { generateEmptyFormState } from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfileContext.tsx'
 import profileApi from 'screens/Profile/profile.api.ts'
 
 interface IProps {

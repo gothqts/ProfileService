@@ -1,40 +1,20 @@
 import styles from './events.module.css'
 import { EventsEntity } from 'screens/Events/events.enum.ts'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import EventCard from 'screens/Events/components/EventCard'
-import ProjectsFilter from 'screens/Events/components/ProjectsFilter'
-import Toggle from 'shared/Toggle'
 import CtrlPanel from 'shared/CtrlPanel'
 import Table from 'shared/Table'
-import eventsApi from 'screens/Events/events.api.ts'
-import { IEvent, ProjectWithoutTimestamps } from 'screens/Events/event.types.ts'
 import cn from 'utils/cn.ts'
 import { useAtomValue } from 'jotai'
 import { authAtom } from 'screens/Auth/auth.atom.ts'
-
+import useEventsCtrl from 'screens/Events/hooks/useEventsCtrl.tsx'
+import Dropdown from 'shared/Inputs/Dropdown'
 
 const Events = () => {
   const auth = useAtomValue(authAtom)
   const [entityType, setEntityType] = useState(EventsEntity.events)
-  const [projects, setProjects] = useState<ProjectWithoutTimestamps[]>([])
-  const [events, setEvents] = useState<IEvent[]>([])
+  const { projects, events, options, handleChange, selectedOptions } = useEventsCtrl({ entityType: entityType })
 
-  useEffect(() => {
-
-    if (entityType === EventsEntity.projects) {
-      eventsApi.getAllProjects().then((data) => {
-        if (data.status === 'success') {
-          setProjects(data.body)
-        }
-      })
-    } else if (entityType === EventsEntity.events) {
-      eventsApi.getAllEvents().then((data) => {
-        if (data.status === 'success') {
-          setEvents(data.body)
-        }
-      })
-    }
-  }, [entityType])
 
   const handleToggle = () => {
     if (entityType === EventsEntity.events) {
@@ -74,12 +54,27 @@ const Events = () => {
         entityType === EventsEntity.projects && (
           <>
             <div className={styles.filters}>
-              <ProjectsFilter object="Мероприятия">
-                <Toggle />
-              </ProjectsFilter>
-              <ProjectsFilter object="Направления">
-                <Toggle />
-              </ProjectsFilter>
+              {/*<SelectInput values={options.events}>*/}
+
+              {/*</SelectInput>*/}
+              <Dropdown
+                placeholder="Мероприятие"
+                options={options.events}
+                name="event"
+                onSelect={handleChange}
+                selectedOption={selectedOptions.event}
+                arrowStyle='default'
+                className={styles.dropdown}
+              />
+              <Dropdown
+                placeholder="Направление"
+                onSelect={handleChange}
+                name="direction"
+                options={options.directions}
+                selectedOption={selectedOptions.direction}
+                arrowStyle='default'
+                className={styles.dropdown}
+              />
             </div>
             <Table
               className={cn('text-body-m', styles.table)}

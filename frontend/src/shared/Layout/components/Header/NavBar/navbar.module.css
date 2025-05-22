@@ -11,3 +11,7 @@
     color: var(--gray);
     font-variant: small-caps;
 }
+.exit_link{
+    height: 20px;
+    cursor: pointer;
+}

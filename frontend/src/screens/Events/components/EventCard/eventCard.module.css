@@ -30,12 +30,8 @@
 }
 
 .btn {
-    cursor: pointer;
     margin: 25px 57px;
     font-size: 20px;
-    background-color: var(--orange);
-    color: var(--white);
-    border: 1px solid rgba(255, 133, 19, 0.64);
     border-radius: 20px;
-    padding: 5px 21px;
+    padding: 0 0;
 }

@@ -28,6 +28,11 @@
     padding: 11px 27px;
     background: var(--white2);
     color: var(--black);
+    transition: 0.3s;
+}
+.link:hover {
+    box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.4);
+    transform: translateY(-1px);
 }
 .link:active{
     color: var(--black);

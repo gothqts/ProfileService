@@ -72,6 +72,10 @@
     align-items: center;
     transition: 0.3s;
 }
+.button:hover {
+    box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
 
 .user_info_container {
     display: flex;

@@ -1,6 +1,6 @@
-import styles from 'screens/Profile/UpdateProfile/Tabs/MyProfile/myProfile.module.css'
-import FormField from 'screens/Profile/UpdateProfile/Tabs/Components/FormField'
-import useProfileFormCtrl from 'screens/Profile/UpdateProfile/Tabs/MyProfile/hooks/useProfileFormCtrl.tsx'
+import styles from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfile.module.css'
+import FormField from 'screens/Profile/UpdateProfile/components/Tabs/Components/FormField'
+import useProfileFormCtrl from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/hooks/useProfileFormCtrl.tsx'
 import Button from 'shared/Buttons'
 import ValidationForm from 'shared/Validation'
 
