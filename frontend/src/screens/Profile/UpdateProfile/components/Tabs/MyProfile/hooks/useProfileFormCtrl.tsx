@@ -71,6 +71,16 @@ const useProfileFormCtrl = () => {
       },
     }))
   }
+  const handleMultiChange = (values: string[], name: string) => {
+    setProfileValues(prev => ({
+      ...prev,
+      user: {
+        ...prev.user,
+        [name]: values,
+      },
+    }));
+  };
+
   const handleSubmitCredentials = () => {
     wait(profileApi.putUserInfo(userData), (resp) => {
       if (resp.status === 'success') {
@@ -92,6 +102,7 @@ const useProfileFormCtrl = () => {
 
   return {
     handleChange,
+    handleMultiChange,
     profileValues,
     options,
     handleSubmitCredentials,

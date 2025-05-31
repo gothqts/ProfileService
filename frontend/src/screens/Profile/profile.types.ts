@@ -1,20 +1,11 @@
-export interface IUpdateProfileValues {
-  surname: string,
-  name: string,
-  patronymic: string,
-  university: string,
-  speciality: string,
-  course: number,
-  specialization: string,
-  stack: string[]
-}
-
 export interface IStudentProjectsAndTeams {
   utils1: IStudentTeams[]
   utils2: IStudentProject[]
 }
 export type ICuratorProjectsAndTeams = IStudentProjectsAndTeams
+
 export type ILeaderProjects = IStudentProject[]
+
 export interface ILeaderProjectsAndDirections {
   utils1: ILeaderDirection[],
   utils2: IStudentProject[],

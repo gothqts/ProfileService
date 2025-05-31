@@ -2,7 +2,7 @@ import { Dispatch, RefObject, SetStateAction, useCallback, useEffect } from 'rea
 import useClickOutside from 'shared/hooks/useClickOutside.tsx'
 
 const usePopup = (
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   onClose: Dispatch<SetStateAction<boolean>>
 ) => {
   useClickOutside(ref, onClose)

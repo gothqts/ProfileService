@@ -54,9 +54,6 @@ const Events = () => {
         entityType === EventsEntity.projects && (
           <>
             <div className={styles.filters}>
-              {/*<SelectInput values={options.events}>*/}
-
-              {/*</SelectInput>*/}
               <Dropdown
                 placeholder="Мероприятие"
                 options={options.events}

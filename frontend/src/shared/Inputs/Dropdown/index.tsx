@@ -6,11 +6,11 @@ import styles from './dropdown.module.css'
 import cn from 'utils/cn.ts'
 import FlippingArrow from 'shared/Buttons/FlippingArrow'
 
-interface IDropdownProps<T extends string | number> {
+interface IDropdownProps<T extends string | number, K extends string> {
   options: IOption<T>[],
   selectedOption?: IOption<T>['value'],
-  onSelect: (option: T, name: string) => void,
-  name: string,
+  onSelect: (option: T, name: K) => void,
+  name: K,
   style?: CSSProperties,
   inputStyle?: CSSProperties,
   className?: string,
@@ -20,7 +20,7 @@ interface IDropdownProps<T extends string | number> {
   arrowStyle?: 'default' | 'orange'
 }
 
-const Dropdown = <T extends string | number>(props: IDropdownProps<T>) => {
+const Dropdown = <T extends string | number, K extends string>(props: IDropdownProps<T, K>) => {
   const ref = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
   usePopup(ref, setIsOpen)
@@ -50,7 +50,7 @@ const Dropdown = <T extends string | number>(props: IDropdownProps<T>) => {
         <div className={styles.arrow}>
           <FlippingArrow
             isOpen={isOpen}
-            arrowStyle={props.arrowStyle ?? "orange"}
+            arrowStyle={props.arrowStyle ?? 'orange'}
           />
         </div>
         {isOpen && (

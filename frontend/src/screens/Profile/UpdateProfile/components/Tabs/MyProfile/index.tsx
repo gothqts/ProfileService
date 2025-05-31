@@ -129,7 +129,7 @@ const MyProfile = () => {
                 <FormFieldMultiDropdown
                   options={profileFormCtrl.options.stacks}
                   selectedOptions={profileFormCtrl.profileValues.user.stack}
-                  onSelect={profileFormCtrl.handleChange}
+                  onSelect={profileFormCtrl.handleMultiChange}
                   name="stack"
                   placeholder="Выберите стек"
                   btnPlaceholder="Добавить свой стек..."

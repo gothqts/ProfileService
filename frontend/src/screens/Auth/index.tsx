@@ -30,7 +30,7 @@ const Auth = () => {
       >
         <div className={authType === AuthTypeEnum.login ? styles.login_bottom : styles.register_bottom}>
           <Button type="submit">
-            {authType === AuthTypeEnum.register ? 'Зарегестрироваться' : 'Войти'}
+            {authType === AuthTypeEnum.register ? 'Зарегистрироваться' : 'Войти'}
           </Button>
           <span
             onClick={changeType}
