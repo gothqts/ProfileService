@@ -1,6 +1,6 @@
 import styles from './meeting.module.css'
 import Table from 'shared/Table'
-import useFetchMeetings from 'screens/Meetings/hooks/useFetchMeetings.ts'
+import useFetchMeetings from 'screens/Meetings/hooks/useFetchMeetings'
 
 const Meetings = () => {
   const { meetings } = useFetchMeetings()

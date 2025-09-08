@@ -1,6 +1,6 @@
 import styles from 'screens/Profile/UpdateProfile/components/Tabs/Components/FormField/formField.module.css'
 import { CSSProperties, PropsWithChildren } from 'react'
-import { IOption } from 'types/global.ts'
+import { IOption } from 'types/global'
 import MultiDropdown from 'shared/Inputs/MultiDropdown'
 
 

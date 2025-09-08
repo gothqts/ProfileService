@@ -1,5 +1,5 @@
-import { ILink } from 'navigation/navigation.types.ts'
-import { urls } from 'navigation/app.urls.ts'
+import { ILink } from 'navigation/navigation.types'
+import { urls } from 'navigation/app.urls'
 
 const links: ILink[] = [
   {

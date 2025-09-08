@@ -1,14 +1,14 @@
 import FormField from 'screens/Profile/UpdateProfile/components/Tabs/Components/FormField'
 import styles from './myProfile.module.css'
 import FormFieldDropdown from 'screens/Profile/UpdateProfile/components/Tabs/Components/FormFieldDropdown'
-import useProfileFormCtrl from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/hooks/useProfileFormCtrl.tsx'
+import useProfileFormCtrl from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/hooks/useProfileFormCtrl'
 import Button from 'shared/Buttons'
 import FormFieldMultiDropdown from 'screens/Profile/UpdateProfile/components/Tabs/Components/FormFieldMultiDropdown'
 import { useState } from 'react'
 import Modal from 'shared/Modal'
 import CreateItemForm from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/Components/CreateItemForm'
-import CreateItemContext from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfileContext.tsx'
-import useCreateItemCtrl from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/hooks/useCreateItemCtrl.tsx'
+import CreateItemContext from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfileContext'
+import useCreateItemCtrl from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/hooks/useCreateItemCtrl'
 import ValidationForm from 'shared/Validation'
 
 const MyProfile = () => {

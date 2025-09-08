@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { generateEmptyFormState } from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfileContext.tsx'
-import profileApi from 'screens/Profile/profile.api.ts'
+import { generateEmptyFormState } from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfileContext'
+import profileApi from 'screens/Profile/profile.api'
 
 interface IProps {
   actionType: 'stack' | 'specialization'

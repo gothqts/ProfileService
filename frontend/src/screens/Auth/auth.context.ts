@@ -1,4 +1,4 @@
-import { IRegisterValues } from 'screens/Auth/auth.types.ts'
+import { IRegisterValues } from 'screens/Auth/auth.types'
 import { createContext } from 'react'
 
 interface IAuthContext {

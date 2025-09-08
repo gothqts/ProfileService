@@ -6,8 +6,8 @@ import {
   useEffect,
   useRef,
 } from 'react'
-import cn from 'utils/cn.ts'
-import ValidationContext from 'shared/Validation/ValidationContext.ts'
+import cn from 'utils/cn'
+import ValidationContext from 'shared/Validation/ValidationContext'
 
 export type OmittedInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size'>
 

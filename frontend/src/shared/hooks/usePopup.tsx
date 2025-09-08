@@ -1,5 +1,5 @@
 import { Dispatch, RefObject, SetStateAction, useCallback, useEffect } from 'react'
-import useClickOutside from 'shared/hooks/useClickOutside.tsx'
+import useClickOutside from 'shared/hooks/useClickOutside'
 
 const usePopup = (
   ref: RefObject<HTMLElement | null>,

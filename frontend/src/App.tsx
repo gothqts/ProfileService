@@ -1,7 +1,7 @@
-import appRouter from 'navigation/app.router.tsx'
+import appRouter from 'navigation/app.router'
 import { RouterProvider } from 'react-router'
 import { useEffect } from 'react'
-import { urls } from 'navigation/app.urls.ts'
+import { urls } from 'navigation/app.urls'
 import AuthProvider from 'screens/Auth/components/AuthProvider'
 
 

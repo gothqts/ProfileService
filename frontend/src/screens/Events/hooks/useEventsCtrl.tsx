@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError.ts'
-import eventsApi from 'screens/Events/events.api.ts'
-import { IEvent, IFilters, ProjectWithoutTimestamps } from 'screens/Events/event.types.ts'
+import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError'
+import eventsApi from 'screens/Events/events.api'
+import { IEvent, IFilters, ProjectWithoutTimestamps } from 'screens/Events/event.types'
 
 
 interface IOption {

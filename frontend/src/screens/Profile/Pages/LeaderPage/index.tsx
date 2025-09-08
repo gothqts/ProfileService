@@ -1,16 +1,16 @@
 import UserInfoTable from 'screens/Profile/components/UserInfoTable'
 import { generateTableCells } from 'screens/Profile'
 import AvatarContainer from 'screens/Profile/components/AvatarContainer'
-import { IUser } from 'screens/Auth/auth.types.ts'
+import { IUser } from 'screens/Auth/auth.types'
 import Table from 'shared/Table'
 import CtrlPanel from 'shared/CtrlPanel'
-import { DepartmentLeadEntities } from 'screens/Profile/profile.enum.ts'
+import { DepartmentLeadEntities } from 'screens/Profile/profile.enum'
 import { useEffect, useState } from 'react'
-import profileApi from 'screens/Profile/profile.api.ts'
+import profileApi from 'screens/Profile/profile.api'
 import {
   ILeaderDirection,
   ILeaderProjects,
-} from 'screens/Profile/profile.types.ts'
+} from 'screens/Profile/profile.types'
 
 const directionHeaders = {
   name: 'Направление',

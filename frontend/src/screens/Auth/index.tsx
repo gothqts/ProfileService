@@ -1,13 +1,13 @@
 import styles from './auth.module.css'
 import CredentialsForm from 'screens/Auth/components/CredentialsForm'
-import { AuthTypeEnum } from 'enums/authEnum.ts'
-import AuthContext from 'screens/Auth/auth.context.ts'
+import { AuthTypeEnum } from 'enums/authEnum'
+import AuthContext from 'screens/Auth/auth.context'
 import { useState } from 'react'
-import useAuthCtrl from 'screens/Auth/hooks/useAuthCtrl.tsx'
+import useAuthCtrl from 'screens/Auth/hooks/useAuthCtrl'
 import Button from 'shared/Buttons'
 import Footer from 'shared/Layout/components/Footer'
 import LogoBlock from 'shared/Layout/components/Header/LogoBlock'
-import cn from 'utils/cn.ts'
+import cn from 'utils/cn'
 import ValidationForm from 'shared/Validation'
 
 const Auth = () => {
@@ -17,6 +17,7 @@ const Auth = () => {
     actionType: authType,
     setAuthType: () => setAuthType(AuthTypeEnum.login),
   })
+
   const changeType = () => {
     authType === AuthTypeEnum.register
       ? setAuthType(AuthTypeEnum.login)

@@ -1,6 +1,6 @@
 import styles from './avatarContainer.module.css'
 import { Link } from 'react-router'
-import { urls } from 'navigation/app.urls.ts'
+import { urls } from 'navigation/app.urls'
 import ProfileIcon from 'assets/icons/profileIcon.svg?react'
 
 interface IProps {

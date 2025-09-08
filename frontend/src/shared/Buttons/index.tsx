@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react'
-import cn from 'utils/cn.ts'
+import cn from 'utils/cn'
 
 export interface IButtonProps
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {

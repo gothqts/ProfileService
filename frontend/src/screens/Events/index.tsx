@@ -1,13 +1,13 @@
 import styles from './events.module.css'
-import { EventsEntity } from 'screens/Events/events.enum.ts'
+import { EventsEntity } from 'screens/Events/events.enum'
 import { useState } from 'react'
 import EventCard from 'screens/Events/components/EventCard'
 import CtrlPanel from 'shared/CtrlPanel'
 import Table from 'shared/Table'
-import cn from 'utils/cn.ts'
+import cn from 'utils/cn'
 import { useAtomValue } from 'jotai'
-import { authAtom } from 'screens/Auth/auth.atom.ts'
-import useEventsCtrl from 'screens/Events/hooks/useEventsCtrl.tsx'
+import { authAtom } from 'screens/Auth/auth.atom'
+import useEventsCtrl from 'screens/Events/hooks/useEventsCtrl'
 import Dropdown from 'shared/Inputs/Dropdown'
 
 const Events = () => {

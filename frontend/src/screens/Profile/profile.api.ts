@@ -1,13 +1,13 @@
 import http, { handleErrorResponse, handleHttpResponse } from 'services/http'
-import config from '../../config.ts'
-import { IUser } from 'screens/Auth/auth.types.ts'
-import { HTTPResponse } from 'services/http/types.ts'
+import config from '../../config'
+import { IUser } from 'screens/Auth/auth.types'
+import { HTTPResponse } from 'services/http/types'
 import {
   ICuratorProjectsAndTeams,
   ILeaderProjectsAndDirections, IOrganizerEvents, IPasswords, ISpecialization, IStack,
   IStudentProjectsAndTeams,
-} from 'screens/Profile/profile.types.ts'
-import { IFormState } from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfileContext.tsx'
+} from 'screens/Profile/profile.types'
+import { IFormState } from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile/myProfileContext'
 
 const getUserInfo = (): Promise<HTTPResponse<IUser>> => {
   return http.get(config.API_URL + '/users').then(handleHttpResponse).catch(handleErrorResponse)

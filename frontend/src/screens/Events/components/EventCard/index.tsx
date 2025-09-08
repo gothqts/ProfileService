@@ -1,5 +1,5 @@
 import styles from './eventCard.module.css'
-import { IEvent } from 'screens/Events/event.types.ts'
+import { IEvent } from 'screens/Events/event.types'
 import Button from 'shared/Buttons'
 
 interface IProps {

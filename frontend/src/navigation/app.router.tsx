@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router'
 import Layout from 'shared/Layout'
-import appRoutes from './app.routes.tsx'
+import appRoutes from './app.routes'
 import LoaderPage from 'shared/Loaders/LoaderPage'
 
 const appRouter = createBrowserRouter([

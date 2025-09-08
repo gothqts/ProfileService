@@ -1,10 +1,10 @@
 import TextInput from 'shared/Inputs/TextInput'
 import PasswordInput from 'shared/Inputs/PasswordInput'
 import { PropsWithChildren, useContext } from 'react'
-import AuthContext from 'screens/Auth/auth.context.ts'
-import cn from 'utils/cn.ts'
+import AuthContext from 'screens/Auth/auth.context'
+import cn from 'utils/cn'
 import styles from 'screens/Auth/auth.module.css'
-import { AuthTypeEnum } from 'enums/authEnum.ts'
+import { AuthTypeEnum } from 'enums/authEnum'
 
 interface IProps {
   serverError: string

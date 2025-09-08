@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useHttpLoader from 'shared/hooks/httpLoader/useHttpLoader.ts'
+import useHttpLoader from 'shared/hooks/httpLoader/useHttpLoader'
 import { HTTPResponse } from 'services/http/types'
 import { AxiosError } from 'axios'
 

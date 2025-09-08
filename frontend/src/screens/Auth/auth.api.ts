@@ -1,6 +1,6 @@
-import { ILoginValues, IRegisterValues } from 'screens/Auth/auth.types.ts'
+import { ILoginValues, IRegisterValues } from 'screens/Auth/auth.types'
 import http, { handleErrorResponse, handleHttpResponse } from 'services/http'
-import config from '../../config.ts'
+import config from '../../config'
 import { AxiosError } from 'axios'
 
 const login = async (data: ILoginValues) => {

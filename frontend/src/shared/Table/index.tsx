@@ -1,5 +1,5 @@
 import styles from './table.module.css'
-import cn from 'utils/cn.ts'
+import cn from 'utils/cn'
 import { CSSProperties } from 'react'
 
 interface ITableProps<T extends Record<string, any>> {

@@ -1,6 +1,6 @@
 import { atom } from 'jotai'
-import { IAuthState } from 'screens/Auth/auth.types.ts'
-import { decode } from 'utils/decodeToken.ts'
+import { IAuthState } from 'screens/Auth/auth.types'
+import { decode } from 'utils/decodeToken'
 
 export const generateEmptyState = () => ({
   auth: {

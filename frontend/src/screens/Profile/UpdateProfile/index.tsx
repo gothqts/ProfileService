@@ -1,13 +1,13 @@
 import styles from './updatePage.module.css'
 import MyProfile from 'screens/Profile/UpdateProfile/components/Tabs/MyProfile'
 import { useState } from 'react'
-import cn from 'utils/cn.ts'
+import cn from 'utils/cn'
 import Contacts from 'screens/Profile/UpdateProfile/components/Tabs/Contacts'
 import ChangePassword from 'screens/Profile/UpdateProfile/components/Tabs/ChangePassword'
 import Button from 'shared/Buttons'
 import DeleteAccForm from 'screens/Profile/UpdateProfile/components/DeleteAccForm'
 import Modal from 'shared/Modal'
-import useUpdateProfileCtrl from 'screens/Profile/UpdateProfile/hooks/useUpdateProfileCtrl.ts'
+import useUpdateProfileCtrl from 'screens/Profile/UpdateProfile/hooks/useUpdateProfileCtrl'
 
 const UpdateProfile = () => {
   const [tab, setTab] = useState('myProfile')

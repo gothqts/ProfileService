@@ -1,4 +1,4 @@
-import cn from 'utils/cn.ts'
+import cn from 'utils/cn'
 import styles from './ctrlPanel.module.css'
 import { CSSProperties } from 'react'
 

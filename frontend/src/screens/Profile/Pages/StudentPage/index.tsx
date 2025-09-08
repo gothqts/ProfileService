@@ -1,11 +1,11 @@
 import UserInfoTable from 'screens/Profile/components/UserInfoTable'
 import { generateTableCells } from 'screens/Profile'
-import { IUser } from 'screens/Auth/auth.types.ts'
+import { IUser } from 'screens/Auth/auth.types'
 import AvatarContainer from 'screens/Profile/components/AvatarContainer'
 import Table from 'shared/Table'
 import { useEffect, useState } from 'react'
-import profileApi from 'screens/Profile/profile.api.ts'
-import { ITableStudentProject } from 'screens/Profile/profile.types.ts'
+import profileApi from 'screens/Profile/profile.api'
+import { ITableStudentProject } from 'screens/Profile/profile.types'
 
 
 interface IProps {

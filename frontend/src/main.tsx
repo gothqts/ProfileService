@@ -4,7 +4,7 @@ import 'styles/ui-kit.css'
 import './styles/sanitize.css'
 import './styles/text.css'
 import './styles/variables.css'
-import App from './App.tsx'
+import App from './App'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>

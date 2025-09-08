@@ -1,7 +1,7 @@
-import { HTTPResponse } from 'services/http/types.ts'
+import { HTTPResponse } from 'services/http/types'
 import http, { handleErrorResponse, handleHttpResponse } from 'services/http'
-import config from '../../config.ts'
-import { IMeeting } from 'screens/Meetings/meetings.types.ts'
+import config from '../../config'
+import { IMeeting } from 'screens/Meetings/meetings.types'
 
 
 const getMeetings = (): Promise<HTTPResponse<IMeeting[]>> => {

@@ -1,9 +1,9 @@
-import { IOption } from 'types/global.ts'
+import { IOption } from 'types/global'
 import { CSSProperties } from 'react'
 import { useRef, useState } from 'react'
-import usePopup from 'shared/hooks/usePopup.tsx'
+import usePopup from 'shared/hooks/usePopup'
 import styles from '../Dropdown/dropdown.module.css'
-import cn from 'utils/cn.ts'
+import cn from 'utils/cn'
 import FlippingArrow from 'shared/Buttons/FlippingArrow'
 
 interface IMultiDropdownProps<T extends string | number> {

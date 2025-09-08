@@ -1,7 +1,7 @@
-import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError.ts'
+import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError'
 import { useEffect, useState } from 'react'
-import meetingsApi from 'screens/Meetings/meetings.api.ts'
-import { IMeeting } from 'screens/Meetings/meetings.types.ts'
+import meetingsApi from 'screens/Meetings/meetings.api'
+import { IMeeting } from 'screens/Meetings/meetings.types'
 
 const useFetchMeetings = () => {
 

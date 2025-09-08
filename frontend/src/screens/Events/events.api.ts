@@ -1,7 +1,7 @@
-import { HTTPResponse } from 'services/http/types.ts'
+import { HTTPResponse } from 'services/http/types'
 import http, { handleErrorResponse, handleHttpResponse } from 'services/http'
-import config from '../../config.ts'
-import { IEvent, IFilters, ProjectWithoutTimestamps } from 'screens/Events/event.types.ts'
+import config from '../../config'
+import { IEvent, IFilters, ProjectWithoutTimestamps } from 'screens/Events/event.types'
 
 export const getAllEvents = (): Promise<HTTPResponse<IEvent[]>> => {
   return http.get(config.API_URL + '/events').then(handleHttpResponse).catch(handleErrorResponse)

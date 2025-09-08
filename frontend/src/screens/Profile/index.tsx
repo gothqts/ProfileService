@@ -1,13 +1,13 @@
 import styles from './profile.module.css'
-import profileApi from 'screens/Profile/profile.api.ts'
-import { IUser } from 'screens/Auth/auth.types.ts'
+import profileApi from 'screens/Profile/profile.api'
+import { IUser } from 'screens/Auth/auth.types'
 import OrganizerPage from 'screens/Profile/Pages/OrganizerPage'
 import StudentPage from 'screens/Profile/Pages/StudentPage'
 import CuratorPage from 'screens/Profile/Pages/CuratorPage'
 import LeaderPage from 'screens/Profile/Pages/LeaderPage'
 import { useEffect } from 'react'
 import { useAtom } from 'jotai/index'
-import { authAtom } from 'screens/Auth/auth.atom.ts'
+import { authAtom } from 'screens/Auth/auth.atom'
 
 export const generateTableCells = (data: IUser) => ({
   about: [

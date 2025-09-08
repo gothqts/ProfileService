@@ -1,7 +1,7 @@
-import profileApi from 'screens/Profile/profile.api.ts'
+import profileApi from 'screens/Profile/profile.api'
 import { useAtom } from 'jotai/index'
-import { authAtom, generateEmptyState } from 'screens/Auth/auth.atom.ts'
-import { IUser } from 'screens/Auth/auth.types.ts'
+import { authAtom, generateEmptyState } from 'screens/Auth/auth.atom'
+import { IUser } from 'screens/Auth/auth.types'
 import { useEffect } from 'react'
 
 

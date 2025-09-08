@@ -1,7 +1,7 @@
 import Table from 'shared/Table'
 import styles from './applications.module.css'
-import useFetchApplications from 'screens/Applications/hooks/useFetchApplications.ts'
-import { IApplication } from 'screens/Applications/applications.types.ts'
+import useFetchApplications from 'screens/Applications/hooks/useFetchApplications'
+import { IApplication } from 'screens/Applications/applications.types'
 
 const Applications = () => {
   const { applications } = useFetchApplications()

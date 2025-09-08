@@ -1,4 +1,4 @@
-import { IValidationFunctionResponse } from './validation.types.ts'
+import { IValidationFunctionResponse } from './validation.types'
 
 const emailValidate = (email: string): IValidationFunctionResponse | null => {
   if (!email) {

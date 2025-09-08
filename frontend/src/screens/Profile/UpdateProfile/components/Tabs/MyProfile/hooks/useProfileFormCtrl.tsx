@@ -1,11 +1,11 @@
-import { authAtom } from 'screens/Auth/auth.atom.ts'
+import { authAtom } from 'screens/Auth/auth.atom'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
-import profileApi from 'screens/Profile/profile.api.ts'
-import { ICourse } from 'screens/Profile/profile.types.ts'
-import validation from 'shared/Validation/validation.ts'
-import useValidationCtrl from 'shared/Validation/useValidationCtrl.ts'
-import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError.ts'
+import profileApi from 'screens/Profile/profile.api'
+import { ICourse } from 'screens/Profile/profile.types'
+import validation from 'shared/Validation/validation'
+import useValidationCtrl from 'shared/Validation/useValidationCtrl'
+import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError'
 
 interface IOption {
   name: string

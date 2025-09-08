@@ -1,7 +1,7 @@
-import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError.ts'
+import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError'
 import { useEffect, useState } from 'react'
-import { IApplication } from 'screens/Applications/applications.types.ts'
-import applicationsApi from 'screens/Applications/application.api.ts'
+import { IApplication } from 'screens/Applications/applications.types'
+import applicationsApi from 'screens/Applications/application.api'
 
 const useFetchApplications = () => {
 

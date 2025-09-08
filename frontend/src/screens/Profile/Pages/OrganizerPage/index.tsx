@@ -1,10 +1,10 @@
 import UserInfoTable from 'screens/Profile/components/UserInfoTable'
 import AvatarContainer from 'screens/Profile/components/AvatarContainer'
-import { IUser } from 'screens/Auth/auth.types.ts'
+import { IUser } from 'screens/Auth/auth.types'
 import Table from 'shared/Table'
 import { useEffect, useState } from 'react'
-import profileApi from 'screens/Profile/profile.api.ts'
-import { IOrganizerEvent } from 'screens/Profile/profile.types.ts'
+import profileApi from 'screens/Profile/profile.api'
+import { IOrganizerEvent } from 'screens/Profile/profile.types'
 
 interface IProps {
   cells: {

@@ -1,10 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import config from '../../config.ts'
-import { IErrorResponse, ISuccessResponse } from 'services/http/types.ts'
-import { generateEmptyState } from 'screens/Auth/auth.atom.ts'
+import config from '../../config'
+import { IErrorResponse, ISuccessResponse } from 'services/http/types'
+import { generateEmptyState } from 'screens/Auth/auth.atom'
 
 import { Dispatch, SetStateAction } from 'react'
-import { IAuthState } from 'screens/Auth/auth.types.ts'
+import { IAuthState } from 'screens/Auth/auth.types'
 
 const http = axios.create({
   baseURL: config.API_URL,

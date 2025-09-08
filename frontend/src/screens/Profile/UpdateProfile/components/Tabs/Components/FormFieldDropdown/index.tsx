@@ -1,6 +1,6 @@
 import styles from 'screens/Profile/UpdateProfile/components/Tabs/Components/FormField/formField.module.css'
 import { PropsWithChildren } from 'react'
-import { IOption } from 'types/global.ts'
+import { IOption } from 'types/global'
 import Dropdown from 'shared/Inputs/Dropdown'
 
 interface IFormFieldDropdownProps<T extends string | number> extends PropsWithChildren {

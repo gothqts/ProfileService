@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { IPasswords } from 'screens/Profile/profile.types.ts'
-import profileApi from 'screens/Profile/profile.api.ts'
-import validation from 'shared/Validation/validation.ts'
-import useValidationCtrl from 'shared/Validation/useValidationCtrl.ts'
-import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError.ts'
+import { IPasswords } from 'screens/Profile/profile.types'
+import profileApi from 'screens/Profile/profile.api'
+import validation from 'shared/Validation/validation'
+import useValidationCtrl from 'shared/Validation/useValidationCtrl'
+import useHttpLoaderWithServerError from 'shared/hooks/httpLoader/useHttpLoaderWithServerError'
 
 const usePasswordCtrl = () => {
   const { wait, loading, serverError } = useHttpLoaderWithServerError()
